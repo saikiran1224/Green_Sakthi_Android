@@ -1,14 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/light_green"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/txtCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lexend"
+            android:lineHeight="@dimen/dimen_30_dp"
+            android:maxLines="2"
+            android:minLines="2"
+            android:padding="5dp"
+            android:text="Hello Saikiran,\nFuel up your vehicle Now!"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            android:layout_below="@id/txtCustomerName"
+            android:layout_marginStart="15dp"
+            android:id="@+id/dieselCard"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="@dimen/dimen_15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:alpha="0.155"
+                    android:src="@drawable/zero_carbon_b" />
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/lexend"
+                    android:text="Zeca Diesel"
+                    android:textColor="@color/green"
+                    android:textSize="45sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtDescription"
+                    android:textStyle="normal"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginEnd="@dimen/dimen_15dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/lexend"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/green"
+                    android:layout_below="@id/txtTitle"
+                    android:text="Zero Carbon Emission Diesel which gives greater mileage and environment friendly" />
+
+                <TextView
+                    android:id="@+id/txtDieselPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtDescription"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/lexend"
+                    android:text="96"
+                    android:textColor="@color/green"
+                    android:textSize="43sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtDieselPrice"
+                    android:id="@+id/txtInfoPrice"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/lexend"
+                    android:lineHeight="@dimen/dimen_20dp"
+                    android:text="including GST\nper Litre"
+                    android:textColor="@color/green" />
+
+                <LinearLayout
+                    android:id="@+id/addToCartLayout"
+                    android:layout_width="180dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="0dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_below="@id/txtInfoPrice"
+                    android:visibility="visible"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:weightSum="5.5"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/button_bg">
+
+                    <TextView
+                        android:id="@+id/item_minus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="—"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textSize="18sp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginStart="3dp"
+                        android:fontFamily="@font/lexend"
+                        android:textColor="@color/white"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/item_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:fontFamily="@font/lexend"
+                        android:text="Add to Cart"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        />
+
+                    <TextView
+                        android:id="@+id/item_plus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="＋"
+                        android:fontFamily="@font/lexend"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginEnd="3dp"
+                        android:paddingBottom="3dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+
+               <!-- <TextView
+                    android:id="@+id/txtQuantity"
+                    android:layout_width="180dp"
+                    android:layout_height="55dp"
+                    android:layout_below="@id/txtInfoPrice"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_40_dp"
+                    android:background="@drawable/button_bg"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="center"
+                    android:shadowColor="#6C63FF"
+                    android:text="Add to Cart"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/addToCartLayout"
+                    android:fontFamily="@font/lexend"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_marginStart="@dimen/dimen_25dp"
+                    android:text="* Minimum 10 Litres quantity" />
+                
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/finalPriceCard"
+            android:layout_below="@id/dieselCard"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/dimen_25dp"
+            app:cardCornerRadius="@dimen/dimen_20dp"
+            app:cardElevation="@dimen/dimen_15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtFinalAmountInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:fontFamily="@font/lexend"
+                    android:text="Final Amount" />
+
+                <TextView
+                    android:id="@+id/txtFinalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_toEndOf="@id/txtFinalAmountInfo"
+                    android:fontFamily="@font/lexend"
+                    android:text="₹ 0.00"
+                    android:textColor="@color/green"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/txtPayButton"
+                    android:layout_marginEnd="@dimen/dimen_15dp"
+                    android:background="@drawable/button_bg"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_baseline_chevron_right_24"
+                    android:focusable="true"
+                    android:padding="@dimen/dimen_15dp"
+                    android:textColor="@color/white"
+                    app:drawableTint="@color/white" />
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+    </RelativeLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>
