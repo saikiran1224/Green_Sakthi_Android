@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "809167757409",
+    "project_id": "green-sakthi",
+    "storage_bucket": "green-sakthi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809167757409:android:ea3daef4d30eced9da0a20",
+        "android_client_info": {
+          "package_name": "com.greenshakthi.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809167757409-cggtufkt997puhjs62q4427lfe83n9rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC90gsCk9YK4v_jzEMDcp03RpLxu2tY9j0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809167757409-cggtufkt997puhjs62q4427lfe83n9rt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

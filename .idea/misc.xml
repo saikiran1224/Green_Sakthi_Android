@@ -3,7 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/drawable/button_bg.xml" value="0.1645" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/drawable/ic_line.xml" value="0.1645" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/drawable/ic_rectangle.xml" value="0.1645" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/drawable/mobile_num_bg.xml" value="0.1645" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/activity_customer_name.xml" value="0.25" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/activity_get_started.xml" value="0.25" />
         <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/activity_otpactivity.xml" value="0.25" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/activity_verify_phone_number.xml" value="0.25" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/fragment_my_orders.xml" value="0.24615384615384617" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/menu/bottom_navigation.xml" value="0.25" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>

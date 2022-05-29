@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Green Sakthi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="an_initiative_by_ngreen_sakthi_fuels_india_private_limited">An initiative by \n<b>Green Sakthi Fuels India Pvt. Ltd.</b></string>
+    <string name="order_zero_carbon_emission_diesel_at_affordable_price_and_get_it_delivered">Order <b>Ze</b>ro <b>Ca</b>rbon Emission diesel at affordable price and get it delivered</string>
 </resources>
