@@ -14,6 +14,12 @@
         android:theme="@style/Theme.GreenSakthi"
         tools:targetApi="31">
         <activity
+            android:name=".home.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.AddressDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".onboarding.CustomerNameActivity"
             android:exported="true" />
         <activity

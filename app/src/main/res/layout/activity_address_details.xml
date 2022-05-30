@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/light_green"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.AddressDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:id="@+id/txtBackButton"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:backgroundTint="@color/edt_bg"
+            android:background="@drawable/button_bg"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_baseline_chevron_left_24"
+            android:focusable="true"
+            android:padding="@dimen/dimen_10dp"
+            android:textColor="@color/white"
+            app:drawableTint="@color/darkgreen" />
+
+
+
+        <!--My Cart-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Cart"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:textColor="@color/green"
+            android:fontFamily="@font/lexend"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="120dp"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:layout_marginTop="18dp"
+                android:layout_height="120dp"
+                android:id="@+id/imageCardView"
+                android:layout_marginBottom="8dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@color/white"
+                app:cardCornerRadius="@dimen/dimen_10dp"
+                app:cardElevation="8dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/zero_carbon_b" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/txtFuelTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:layout_toEndOf="@id/imageCardView"
+                android:fontFamily="@font/lexend"
+                android:text="Diesel Name"
+                android:textColor="@color/green"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtFuelPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtFuelTitle"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/imageCardView"
+                android:fontFamily="@font/lexend"
+                android:text="₹ 96.0 per Litre"
+                android:textSize="@dimen/text_size_17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtFuelPrice"
+                android:id="@+id/selectedQuantity"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_toEndOf="@id/imageCardView"
+                android:fontFamily="@font/lexend"
+                android:text="Quantity: 1000 Litres"
+                android:textColor="@color/darkgreen"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivery Location"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/green"
+            android:fontFamily="@font/lexend"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:id="@+id/address_1"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:background="@drawable/mobile_num_bg"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_address"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="10dp"
+                android:gravity="top|start"
+                android:minLines="3"
+                android:scrollbars="vertical"
+                android:lines="8"
+                android:maxLines="10"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/lexend"
+                android:hint="Enter your Address briefly"
+                android:paddingStart="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_15dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_17sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Info"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/green"
+            android:fontFamily="@font/lexend"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtSubTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:fontFamily="@font/lexend"
+                android:text="Subtotal"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtSubTotal_Price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/lexend"
+                android:text="₹ 1500.0"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtShippingCharges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSubTotal"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:fontFamily="@font/lexend"
+                android:text="Shipping Charges"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtShippingCharges_Price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSubTotal_Price"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/lexend"
+                android:text="₹ 0.0"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.1"
+                android:id="@+id/greenView"
+                android:background="@color/green"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_marginEnd="@dimen/dimen_20dp"
+                android:layout_below="@id/txtShippingCharges" />
+
+            <TextView
+                android:id="@+id/txtTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/greenView"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:fontFamily="@font/lexend"
+                android:text="Total Price"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtTotal_Price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/greenView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/lexend"
+                android:text="₹ 1500.0"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            app:cardElevation="@dimen/dimen_10dp"
+            app:cardBackgroundColor="@color/green"
+            android:id="@+id/proceedToPaymentCard"
+            app:cardCornerRadius="15dp"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:layout_marginBottom="@dimen/dimen_25dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/lexend"
+                    android:text="Proceed to Payment"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="40dp"
+                    android:layout_height="@dimen/dimen_40_dp"
+                    android:layout_alignParentEnd="true"
+                    app:cardBackgroundColor="@color/edt_bg"
+                    app:cardCornerRadius="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dimen_20dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:tint="@color/green"
+                        android:src="@drawable/ic_baseline_chevron_right_24" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
