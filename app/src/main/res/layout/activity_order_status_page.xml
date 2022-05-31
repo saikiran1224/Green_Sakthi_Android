@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/light_green"
+    android:layout_height="match_parent"
+    tools:context=".home.OrderStatusPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/displayedAnim"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_300_dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/dimen_25dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="@dimen/dimen_25dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/success_anim" />
+
+        <TextView
+            android:id="@+id/successMessageBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/displayedAnim"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:text="Order Placed Successfully!"
+            android:textColor="@color/green"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/messageSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/successMessageBig"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:gravity="center"
+            android:text="Your Order has been placed successfully. Please visit My Orders page to know the status of the order"
+            android:textSize="@dimen/text_size_16sp" />
+
+        <TextView
+            android:id="@+id/txt_myOrdersPage"
+            android:layout_width="@dimen/dimen_300_dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/messageSmall"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="@dimen/dimen_15dp"
+            android:background="@drawable/button_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/lexend"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:shadowColor="#6C63FF"
+            android:text="@string/click_here_for_b_my_orders_b_page"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

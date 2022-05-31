@@ -1,14 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_green"
     android:layout_height="match_parent"
     tools:context=".home.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manage Profile"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:textSize="23sp"
+            android:id="@+id/txtManageProfile"
+            android:textColor="@color/green"
+            android:textStyle="bold" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/profileAnim"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/txtManageProfile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimen_40_dp"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/profile_anim" />
+
+        <TextView
+            android:id="@+id/txtCustName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profileAnim"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/dimen_40_dp"
+            android:background="@drawable/button_bg"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/white"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:paddingBottom="3dp"
+            android:text="Customer Name"
+            android:textColor="@color/white"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/txtCustPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtCustName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/dimen_30_dp"
+            android:background="@drawable/button_bg"
+            android:drawableStart="@drawable/ic_baseline_local_phone_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/white"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:paddingBottom="3dp"
+            android:text="Phone Number"
+            android:textColor="@color/white"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/txtLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtCustPhone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/dimen_50_dp"
+            android:background="@drawable/order_status_btn"
+            android:backgroundTint="#E1E0E0"
+            android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/red"
+            android:gravity="center|center_vertical|center_horizontal"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:paddingBottom="5dp"
+            android:text="Logout"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.core.widget.NestedScrollView>

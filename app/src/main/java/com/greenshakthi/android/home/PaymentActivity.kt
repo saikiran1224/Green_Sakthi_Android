@@ -1,5 +1,6 @@
 package com.greenshakthi.android.home
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -10,12 +11,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.greenshakthi.android.models.OrderData
 import com.greenshakthi.android.utils.AppPreferences
 import com.razorpay.Checkout
 import com.razorpay.ExternalWalletListener
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, ExternalWalletListener {
@@ -23,11 +30,19 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
     lateinit var txtBackButton: TextView
 
     lateinit var onlinePaymentCard: MaterialCardView
+    lateinit var cashOnDeliveryCard: MaterialCardView
 
     private var finalPrice: String = ""
 
     private val TAG = PaymentActivity::class.java.simpleName
     private var alertDialogBuilder: AlertDialog.Builder? = null
+
+    private var customerAddress: String = ""
+    private var fuelName: String = ""
+    private var fuelUnitPrice: String = ""
+    private var selectedQuantity: String = ""
+
+    lateinit var db: FirebaseFirestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +57,9 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         txtBackButton = findViewById(com.greenshakthi.android.R.id.txtBackButton)
 
         onlinePaymentCard = findViewById(com.greenshakthi.android.R.id.OnlinePaymentCard)
+        cashOnDeliveryCard = findViewById(com.greenshakthi.android.R.id.cashOnDeliveryCard)
+
+        db = Firebase.firestore
 
         alertDialogBuilder = AlertDialog.Builder(this@PaymentActivity)
         alertDialogBuilder!!.setCancelable(false)
@@ -52,7 +70,11 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         })
 
         val intent = intent
-        finalPrice = "%.2f".format(intent.getFloatExtra("finalPrice",0.00f)).toString().replace(".","")
+        finalPrice = "%.2f".format(intent.getFloatExtra("finalPrice",0.00f)).toString()
+        customerAddress = intent.getStringExtra("custAddress").toString().trim()
+        fuelName = intent.getStringExtra("fuelName").toString()
+        fuelUnitPrice = intent.getStringExtra("fuelUnitPrice").toString()
+        selectedQuantity = intent.getStringExtra("selectedQuantity").toString()
 
         txtBackButton.setOnClickListener {
 
@@ -79,12 +101,18 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
         onlinePaymentCard.setOnClickListener { startPayment(finalPrice) }
 
+        cashOnDeliveryCard.setOnClickListener { placeOrder("COD","0") }
+
 }
 
     override fun onPaymentSuccess(s: String?, paymentData: PaymentData?) {
         try {
-            alertDialogBuilder!!.setMessage("Payment Successful :\nPayment ID: "+s+"\nPayment Data: "+paymentData!!.getData())
-            alertDialogBuilder!!.show()
+
+            // placing Order
+            placeOrder("Online", paymentData!!.paymentId.toString())
+
+           // alertDialogBuilder!!.setMessage("Payment Successful :\nPayment ID: "+s+"\nPayment Data: "+paymentData!!.getData())
+           // alertDialogBuilder!!.show()
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -92,8 +120,14 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
     override fun onPaymentError(p0: Int, p1: String?, paymentData: PaymentData?) {
         try {
-            alertDialogBuilder!!.setMessage("Payment Failed:\nPayment Data: "+paymentData!!.getData())
-            alertDialogBuilder!!.show()
+
+            // Some Error Occurred - redirect user to Order Status Page
+            val intent = Intent(this, OrderStatusPage::class.java)
+            intent.putExtra("status","Failure")
+            startActivity(intent)
+
+           // alertDialogBuilder!!.setMessage("Payment Failed:\nPayment Data: "+paymentData!!.getData())
+           // alertDialogBuilder!!.show()
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -101,11 +135,38 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
     override fun onExternalWalletSelected(p0: String?, paymentData: PaymentData?) {
         try {
-            alertDialogBuilder!!.setMessage("Payment Successful :\nPayment ID: "+p0+"\nPayment Data: "+paymentData!!.getData())
-            alertDialogBuilder!!.show()
+
+            placeOrder("Online", paymentData!!.paymentId.toString())
+
+          //  alertDialogBuilder!!.setMessage("Payment Successful :\nPayment ID: "+p0+"\nPayment Data: "+paymentData!!.getData())
+          //  alertDialogBuilder!!.show()
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun placeOrder(transactionMode: String, paymentID: String) {
+
+        // generating an Unique ID based on time
+        val order_id = (Date().time / 1000L % Int.MAX_VALUE).toInt()
+
+        // retrieving the date and time the order is placed
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss a")
+        val currentDateTime = sdf.format(Date())
+
+        val orderData = OrderData(order_id.toString(),currentDateTime,finalPrice,customerAddress,"Placed",transactionMode, paymentID, fuelName, fuelUnitPrice, selectedQuantity, AppPreferences.customerName.toString(), AppPreferences.customerPhone.toString(), AppPreferences.customerID.toString()  )
+
+        db.collection("Orders_Data")
+            .add(orderData)
+            .addOnSuccessListener {
+
+                // Order placed successfully - redirect user to Order Success Page
+                val intent = Intent(this, OrderStatusPage::class.java)
+                intent.putExtra("status","Success")
+                startActivity(intent)
+
+            }
     }
 
     fun startPayment(finalPrice: String) {
@@ -125,7 +186,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://lh3.googleusercontent.com/a-/AOh14GggVXXZ53BLTOaYsWNRA_VsQyclib83q7MZZOq4=s360-p-rw-no")
             options.put("currency", "INR")
-            options.put("amount", finalPrice)
+            options.put("amount", finalPrice.replace(".",""))
 
             val preFill = JSONObject()
             preFill.put("email","")
@@ -141,18 +202,12 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         }
     }
 
-   /* private fun startPayment() {
+    override fun onBackPressed() {
+        super.onBackPressed()
 
-        val checkout = Checkout()
-        checkout.setKeyID("rzp_test_lE2DlcWuyCnraO")
-
-        checkout.setImage(R.drawable.green_sakthi_logo)
-
-        val activity: Activity = this
-
-
-
-
-
-    }*/
+        // Some Error Occurred - redirect user to Order Status Page
+        val intent = Intent(this, OrderStatusPage::class.java)
+        intent.putExtra("status","Failure")
+        startActivity(intent)
+    }
 }

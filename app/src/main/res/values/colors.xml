@@ -9,6 +9,8 @@
     <color name="edt_bg">#CBE6CE</color>
     <color name="teal_700">#FF018786</color>
 
+    <color name="red">#F44336</color>
+
     <color name="welcome_title">#0F216D</color>
     <color name="greeting">#7E8795</color>
     <color name="button_bg">#6C63FF</color>
@@ -22,4 +24,5 @@
     <color name="layout_bg">#80F2F1FD</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="amount_due_color">#FFC107</color>
 </resources>

@@ -6,4 +6,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="an_initiative_by_ngreen_sakthi_fuels_india_private_limited">An initiative by \n<b>Green Sakthi Fuels India Pvt. Ltd.</b></string>
     <string name="order_zero_carbon_emission_diesel_at_affordable_price_and_get_it_delivered">Order <b>Ze</b>ro <b>Ca</b>rbon Emission diesel at affordable price and get it delivered</string>
+    <string name="click_here_for_b_my_orders_b_page">Click here to go back to <b>Main Menu</b></string>
+    <string name="dashes_line">-------------------------------------------------------------------------</string>
 </resources>

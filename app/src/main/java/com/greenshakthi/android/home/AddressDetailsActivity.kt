@@ -28,6 +28,7 @@ class AddressDetailsActivity : AppCompatActivity() {
     lateinit var proceedToPaymentCard: MaterialCardView
 
     private var finalPrice: Float = 0.00f
+    private var quantityValue: String = ""
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +69,7 @@ class AddressDetailsActivity : AppCompatActivity() {
         val intent = intent!!
 
         finalPrice = "%.2f".format(intent.getFloatExtra("finalPrice",0.00f)).toString().toFloat()
+        quantityValue = intent.getStringExtra("selectedQuantity").toString()
 
         txtFuelTitle.text = intent.getStringExtra("fuelTitle").toString()
         txtFuelPrice.text = "₹ " + "%.2f".format(intent.getFloatExtra("fuelPrice",0.00f)).toString() + " per Litre"
@@ -91,6 +93,10 @@ class AddressDetailsActivity : AppCompatActivity() {
 
                 // proceed to Payment Page
                 val intent = Intent(this, PaymentActivity::class.java)
+                intent.putExtra("fuelName", txtFuelTitle.text.toString())
+                intent.putExtra("fuelUnitPrice",txtFuelPrice.text.toString())
+                intent.putExtra("selectedQuantity",quantityValue)
+                intent.putExtra("custAddress",addressEntered)
                 intent.putExtra("finalPrice", finalPrice)
                 startActivity(intent)
             }

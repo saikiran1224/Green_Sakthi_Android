@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/dimen_10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="@dimen/dimen_10dp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/headerLayout"
+            android:background="@color/edt_bg"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                android:layout_margin="@dimen/dimen_15dp"
+                app:cardElevation="3dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/fuelLogo"
+                android:layout_height="60dp">
+
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/zero_carbon_b" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/txtFuelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_toEndOf="@id/fuelLogo"
+                android:text="Zeca Diesel"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtOrderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtFuelName"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@id/fuelLogo"
+                android:text="#12367890" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:background="@drawable/order_status_btn"
+                android:backgroundTint="#388E3C"
+                android:gravity="end"
+                android:paddingStart="8dp"
+                android:id="@+id/txtOrderStatus"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:text="Delivered"
+                android:textColor="@color/white"
+                android:textSize="16.5sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_below="@id/headerLayout"
+            android:layout_height="0.5dp"
+            android:id="@+id/dividerGray"
+            android:background="@android:color/darker_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@id/dividerGray"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/quantity_UnitPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="@dimen/dimen_15dp"
+                    android:text="10 x Rs. 105.50 per Litre"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtFinalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="Rs. 1150.00"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtFinalPrice"
+                    android:textColor="#DCDBDB"
+                    android:maxLines="1"
+                    android:layout_marginTop="5dp"
+                    android:lines="1"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/divider_2"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="12sp"
+                    android:text="@string/dashes_line" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/divider_2"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:id="@+id/txtTransStatus"
+                    android:text="Amount Due"
+                    android:textColor="@color/amount_due_color"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/divider_2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/txtTimeStamp"
+                    android:layout_marginEnd="13dp"
+                    android:text="31-05-2022 at 02:00PM"
+                    android:textSize="15sp" />
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>
