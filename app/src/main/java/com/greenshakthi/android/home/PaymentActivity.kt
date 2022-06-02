@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -21,7 +22,10 @@ import com.razorpay.ExternalWalletListener
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import org.json.JSONObject
+import java.lang.Math.abs
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 
 
@@ -149,16 +153,20 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
     private fun placeOrder(transactionMode: String, paymentID: String) {
 
         // generating an Unique ID based on time
-        val order_id = (Date().time / 1000L % Int.MAX_VALUE).toInt()
+        val order_id = (Date().time / 1000L % Int.MAX_VALUE).toInt().toString()
 
         // retrieving the date and time the order is placed
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss a")
         val currentDateTime = sdf.format(Date())
 
-        val orderData = OrderData(order_id.toString(),currentDateTime,finalPrice,customerAddress,"Placed",transactionMode, paymentID, fuelName, fuelUnitPrice, selectedQuantity, AppPreferences.customerName.toString(), AppPreferences.customerPhone.toString(), AppPreferences.customerID.toString()  )
+
+        val key = db.collection("Orders_Data").document().id
+
+        val orderData = OrderData(order_id,currentDateTime,finalPrice,customerAddress,"Placed",transactionMode, paymentID, fuelName, fuelUnitPrice, selectedQuantity, AppPreferences.customerName.toString(), AppPreferences.customerPhone.toString(), AppPreferences.customerID.toString(),key)
 
         db.collection("Orders_Data")
-            .add(orderData)
+            .document(key)
+            .set(orderData)
             .addOnSuccessListener {
 
                 // Order placed successfully - redirect user to Order Success Page
@@ -167,6 +175,13 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
                 startActivity(intent)
 
             }
+    }
+
+    fun getRandomString(length: Int) : String {
+        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+        return (1..length)
+            .map { allowedChars.random().toUpperCase() }
+            .joinToString("")
     }
 
     fun startPayment(finalPrice: String) {

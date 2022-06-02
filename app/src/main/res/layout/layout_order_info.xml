@@ -61,20 +61,23 @@
                 android:text="#12367890" />
 
             <TextView
+                android:id="@+id/txtOrderStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/dimen_20dp"
-                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
                 android:background="@drawable/order_status_btn"
                 android:backgroundTint="#388E3C"
+                android:drawableStart="@drawable/ic_placed"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/white"
                 android:gravity="end"
                 android:paddingStart="8dp"
-                android:id="@+id/txtOrderStatus"
-                android:paddingTop="3dp"
+                android:paddingTop="5dp"
                 android:paddingEnd="8dp"
-                android:paddingBottom="3dp"
+                android:paddingBottom="5dp"
                 android:text="Delivered"
                 android:textColor="@color/white"
                 android:textSize="16.5sp" />

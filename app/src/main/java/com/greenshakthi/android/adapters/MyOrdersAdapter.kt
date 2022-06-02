@@ -1,26 +1,26 @@
-package com.greenshakthi.android
+package com.greenshakthi.android.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.greenshakthi.android.R
 import com.greenshakthi.android.models.OrderData
-import org.w3c.dom.Text
 
 class MyOrdersAdapter(private val context: Context, private val myOrdersList: ArrayList<OrderData>):
     RecyclerView.Adapter<MyOrdersAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyOrdersAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val  view = LayoutInflater.from(parent.context).inflate(R.layout.layout_order_info,parent,false)
         return ViewHolder(view)
     }
 
-    @SuppressLint("SetTextI18n", "ResourceAsColor")
-    override fun onBindViewHolder(holder: MyOrdersAdapter.ViewHolder, position: Int) {
+    @SuppressLint("SetTextI18n", "ResourceAsColor", "UseCompatTextViewDrawableApis")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             holder.fuelTitle.text = myOrdersList[position].fuelName
             holder.orderID.text = "#" + myOrdersList[position].orderID
@@ -28,7 +28,22 @@ class MyOrdersAdapter(private val context: Context, private val myOrdersList: Ar
             holder.quantity_UnitPrice.text = myOrdersList[position].fuelQuantitySelected + " x " + myOrdersList[position].fuelUnitPrice
             holder.finalPrice.text = "₹ " + myOrdersList[position].finalPrice
 
-            if (myOrdersList[position].transactionMode == "COD") {
+            val orderStatus = myOrdersList[position].orderStatus
+            if(orderStatus == "Placed") {
+                holder.orderStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_placed, 0, 0, 0)
+                holder.orderStatus.compoundDrawableTintList = ColorStateList.valueOf(context.resources.getColor(R.color.white))
+            } else if(orderStatus == "Confirmed") {
+                holder.orderStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_confirmed_svgrepo_com, 0, 0, 0)
+                holder.orderStatus.compoundDrawableTintList = ColorStateList.valueOf(context.resources.getColor(R.color.white))
+            } else if(orderStatus == "In Transit") {
+                holder.orderStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_in_transit, 0, 0, 0)
+                holder.orderStatus.compoundDrawableTintList = ColorStateList.valueOf(context.resources.getColor(R.color.white))
+            } else {
+                holder.orderStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_delivered, 0, 0, 0)
+                holder.orderStatus.compoundDrawableTintList = ColorStateList.valueOf(context.resources.getColor(R.color.white))
+            }
+
+        if (myOrdersList[position].transactionMode == "COD") {
                 holder.transactionStatus.text = "Amount Due"
                 holder.transactionStatus.setTextColor(context.resources.getColor(R.color.amount_due_color))
             } else {
