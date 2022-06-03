@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,106 +7,138 @@
     android:orientation="vertical"
     tools:context=".onboarding.OTPActivity">
 
-
     <LinearLayout
-        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@drawable/ic_rectangle"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_otp_verification"
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lexend"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/ic_rectangle"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_otp_verification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend"
+                android:gravity="center"
+                android:padding="@dimen/padding_10dp"
+                android:text="OTP sent successfully to \n+91 000000000"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_25sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:gravity="center"
-            android:padding="@dimen/padding_10dp"
-            android:text="OTP sent successfully to \n+91 000000000"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_size_25sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_enter_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/lexend"
+                android:padding="@dimen/padding_10dp"
+                android:text="Enter the OTP you have received"
+                android:textColor="@color/verify_no"
+                android:textSize="@dimen/text_size_17sp" />
+
+
+            <com.chaos.view.PinView
+                android:id="@+id/otp_view"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_enter_otp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginBottom="@dimen/dimen_15dp"
+                android:cursorVisible="true"
+                android:fontFamily="@font/lexend"
+                android:inputType="number"
+                android:itemBackground="@color/edt_bg"
+                android:padding="0dp"
+                android:textColor="@color/green"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cursorWidth="2dp"
+                app:hideLineWhenFilled="false"
+                app:itemCount="6"
+                app:itemHeight="45dp"
+                app:itemRadius="8dp"
+                app:itemSpacing="10dp"
+                app:itemWidth="45dp"
+                app:lineColor="@color/white"
+                app:lineWidth="1dp"
+                app:viewType="rectangle" />
+
+            <TextView
+                android:id="@+id/txt_resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/otp_view"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/lexend"
+                android:padding="@dimen/padding_10dp"
+                android:text="Resend in 00:10"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:id="@+id/img_otp_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_resend"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginBottom="-1.5dp"
+                android:padding="@dimen/dimen_15dp"
+                android:src="@drawable/ic_otp_verification" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/loadingLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-        <TextView
-            android:id="@+id/txt_enter_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/lexend"
-            android:padding="@dimen/padding_10dp"
-            android:text="Enter the OTP you have received"
-            android:textColor="@color/verify_no"
-            android:textSize="@dimen/text_size_17sp" />
-
-
-        <com.chaos.view.PinView
-            android:id="@+id/otp_view"
-            style="@style/PinWidget.PinView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_enter_otp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:layout_marginEnd="@dimen/dimen_10dp"
-            android:layout_marginBottom="@dimen/dimen_15dp"
-            android:cursorVisible="true"
-            android:fontFamily="@font/lexend"
-            android:inputType="number"
-            android:itemBackground="@color/edt_bg"
-            android:padding="0dp"
-            android:textColor="@color/green"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cursorWidth="2dp"
-            app:hideLineWhenFilled="false"
-            app:itemCount="6"
-            app:itemHeight="45dp"
-            app:itemRadius="8dp"
-            app:itemSpacing="10dp"
-            app:itemWidth="45dp"
-            app:lineColor="@color/white"
-            app:lineWidth="1dp"
-            app:viewType="rectangle" />
-
-        <TextView
-            android:id="@+id/txt_resend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/otp_view"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/lexend"
-            android:padding="@dimen/padding_10dp"
-            android:text="Resend in 00:10"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_size_16sp"
-            android:textStyle="normal" />
-
-        <ImageView
-            android:id="@+id/img_otp_screen"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_resend"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:layout_marginBottom="-1.5dp"
-            android:padding="@dimen/dimen_15dp"
-            android:src="@drawable/ic_otp_verification" />
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="#000000" />
+
+       <com.airbnb.lottie.LottieAnimationView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+           app:lottie_rawRes="@raw/loading_anim"
+           app:lottie_autoPlay="true"
+           app:lottie_loop="true"
+           android:id="@+id/loadingAnim" />
 
     </RelativeLayout>
 
 
 
-</LinearLayout>
+
+</FrameLayout>

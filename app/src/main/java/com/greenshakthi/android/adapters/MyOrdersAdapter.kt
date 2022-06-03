@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.greenshakthi.android.R
 import com.greenshakthi.android.models.OrderData
 
-class MyOrdersAdapter(private val context: Context, private val myOrdersList: ArrayList<OrderData>):
+class MyOrdersAdapter(private val context: Context, private val myOrdersList: List<OrderData>):
     RecyclerView.Adapter<MyOrdersAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

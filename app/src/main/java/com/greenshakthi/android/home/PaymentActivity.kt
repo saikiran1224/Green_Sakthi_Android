@@ -153,14 +153,18 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
     private fun placeOrder(transactionMode: String, paymentID: String) {
 
         // generating an Unique ID based on time
-        val order_id = (Date().time / 1000L % Int.MAX_VALUE).toInt().toString()
+
+        val key = db.collection("Orders_Data").document().id
+
+        val substring_key = key.substring(0,5)
+
+        val order_id = (Date().time / 1000L % Int.MAX_VALUE).toInt().toString().substring(0,6) + substring_key.toUpperCase()
+
 
         // retrieving the date and time the order is placed
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss a")
         val currentDateTime = sdf.format(Date())
 
-
-        val key = db.collection("Orders_Data").document().id
 
         val orderData = OrderData(order_id,currentDateTime,finalPrice,customerAddress,"Placed",transactionMode, paymentID, fuelName, fuelUnitPrice, selectedQuantity, AppPreferences.customerName.toString(), AppPreferences.customerPhone.toString(), AppPreferences.customerID.toString(),key)
 
@@ -175,13 +179,6 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
                 startActivity(intent)
 
             }
-    }
-
-    fun getRandomString(length: Int) : String {
-        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
-        return (1..length)
-            .map { allowedChars.random().toUpperCase() }
-            .joinToString("")
     }
 
     fun startPayment(finalPrice: String) {

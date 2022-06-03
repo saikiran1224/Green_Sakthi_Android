@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,9 @@ class MyOrdersFragment : Fragment() {
 
     lateinit var db: FirebaseFirestore
 
+    lateinit var mainLayout: RelativeLayout
+    lateinit var loadingAnim: LottieAnimationView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
@@ -40,6 +44,9 @@ class MyOrdersFragment : Fragment() {
 
         customerUUID = AppPreferences.customerID.toString()
 
+        mainLayout = view.findViewById(R.id.mainLayout)
+        loadingAnim = view.findViewById(R.id.loadingAnim)
+
         txtNoDataAnim = view.findViewById(R.id.txtNoDataAnim)
         noDataAnim = view.findViewById(R.id.no_data_anim)
 
@@ -47,6 +54,9 @@ class MyOrdersFragment : Fragment() {
 
         myOrdersRecycler = view.findViewById(R.id.myOrdersRecycler)
         myOrdersList = ArrayList()
+
+        mainLayout.visibility = View.GONE
+        loadingAnim.visibility = View.VISIBLE
 
         loadOrdersData()
 
@@ -68,6 +78,7 @@ class MyOrdersFragment : Fragment() {
                     myOrdersList.add(orderData!!)
                 }
 
+
                 if(!myOrdersList.isEmpty()) {
 
                     myOrdersRecycler.visibility = View.VISIBLE
@@ -75,12 +86,22 @@ class MyOrdersFragment : Fragment() {
                     txtNoDataAnim.visibility = View.GONE
                     noDataAnim.visibility = View.GONE
 
-                    val myOrdersAdapter = context?.let { MyOrdersAdapter(it, myOrdersList) }
+                    val sortedList = myOrdersList.sortedWith(compareByDescending { it.dateTimePlaced }, ) as List<OrderData>
+
+                    val myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }
                     val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
                     myOrdersRecycler.adapter = myOrdersAdapter
                     myOrdersRecycler.layoutManager = linearLayoutManager
 
+
+                    loadingAnim.visibility = View.GONE
+                    mainLayout.visibility = View.VISIBLE
+
                 } else {
+
+                    loadingAnim.visibility = View.GONE
+                    mainLayout.visibility = View.VISIBLE
+                      
                     // No Data in MyOrders
                     txtNoDataAnim.visibility = View.VISIBLE
                     noDataAnim.visibility = View.VISIBLE

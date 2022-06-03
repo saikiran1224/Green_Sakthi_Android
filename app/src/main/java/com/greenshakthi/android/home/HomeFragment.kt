@@ -12,9 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -39,6 +41,9 @@ class HomeFragment : Fragment() {
 
     lateinit var db: FirebaseFirestore
 
+    lateinit var mainLayout: RelativeLayout
+    lateinit var loadingAnim: LottieAnimationView
+
     @SuppressLint("SetTextI18n", "CutPasteId")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -49,10 +54,16 @@ class HomeFragment : Fragment() {
 
         txtCustomerName = view.findViewById(R.id.txtCustomerName)
 
+        mainLayout = view.findViewById(R.id.mainLayout)
+        loadingAnim = view.findViewById(R.id.loadingAnim)
+
         // Fuel Details
         txtFuelTitle = view.findViewById(R.id.txtTitle)
         txtFuelDesc = view.findViewById(R.id.txtDescription)
         txtDieselPrice = view.findViewById(R.id.txtDieselPrice)
+
+        mainLayout.visibility = View.GONE
+        loadingAnim.visibility = View.VISIBLE
 
         db = Firebase.firestore
         db.collection("Fuels_Data")
@@ -71,8 +82,16 @@ class HomeFragment : Fragment() {
                     txtFuelTitle.text = fuelData.fuelName.toString()
                     txtFuelDesc.text = fuelData.fuelDesc.toString()
                     txtDieselPrice.text = "₹ " + fuelData.fuelPrice.toString()
-                }
 
+                    loadingAnim.visibility = View.GONE
+                    mainLayout.visibility = View.VISIBLE
+                }
+            }.addOnFailureListener {
+
+                loadingAnim.visibility = View.GONE
+                mainLayout.visibility = View.VISIBLE
+
+                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
             }
 
         // TODO: Check the Decimal Multiplication Problem and comma(,) representation
@@ -185,6 +204,7 @@ class HomeFragment : Fragment() {
             val finalPrice_splitted: Float = list[1].toFloat()
 
             requestAddressFromUser(itemQuantity.text.toString(), finalPrice_splitted)
+
         }
 
 

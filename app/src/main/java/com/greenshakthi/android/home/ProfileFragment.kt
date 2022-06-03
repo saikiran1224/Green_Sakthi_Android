@@ -1,16 +1,19 @@
 package com.greenshakthi.android.home
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.greenshakthi.android.R
 import com.greenshakthi.android.onboarding.GetStartedActivity
 import com.greenshakthi.android.utils.AppPreferences
+import kotlin.math.log
 
 
 class ProfileFragment : Fragment() {
@@ -37,16 +40,32 @@ class ProfileFragment : Fragment() {
 
         txtLogoutBtn.setOnClickListener {
 
-            // TODO: Ask user Logout dialog once again
+            val logoutDialog = Dialog(requireContext())
+            logoutDialog.setContentView(R.layout.logout_dialog)
+            logoutDialog.setCancelable(false)
+            logoutDialog.setCanceledOnTouchOutside(false)
+            logoutDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
-            AppPreferences.isLogin = false
+            logoutDialog.findViewById<Button>(R.id.btnLogout).setOnClickListener{
+                // TODO: Ask user Logout dialog once again
 
-            // logging out from Firebase
-            FirebaseAuth.getInstance().signOut()
+                AppPreferences.isLogin = false
 
-            // redirecting back to Get Started Page
-            val intent = Intent(requireContext(), GetStartedActivity::class.java)
-            startActivity(intent)
+                // logging out from Firebase
+                FirebaseAuth.getInstance().signOut()
+
+                // redirecting back to Get Started Page
+                val intent = Intent(requireContext(), GetStartedActivity::class.java)
+                startActivity(intent)
+
+
+            }
+
+            logoutDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                logoutDialog.dismiss()
+            }
+
+            logoutDialog.show()
 
         }
 

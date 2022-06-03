@@ -75,7 +75,7 @@
                 android:fontFamily="@font/lexend"
                 android:padding="@dimen/padding_5dp"
                 android:text="+91"
-                android:textColor="@color/mobile_no"
+                android:textColor="@color/green"
                 android:textSize="@dimen/text_size_17sp"
                 android:visibility="visible" />
 
@@ -83,14 +83,14 @@
                 android:id="@+id/phone_number_edt"
                 android:layout_width="@dimen/dimen_250_dp"
                 android:layout_height="@dimen/dimen_40_dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/lexend"
                 android:hint="Mobile Number"
                 android:inputType="phone"
                 android:maxLength="10"
-                android:textColor="@color/mobile_no"
+                android:textColor="@color/green"
                 android:textSize="@dimen/text_size_17sp" />
         </LinearLayout>
 

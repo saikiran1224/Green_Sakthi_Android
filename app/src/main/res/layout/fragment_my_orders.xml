@@ -11,60 +11,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="My Orders"
-             android:layout_marginStart="@dimen/dimen_15dp"
-             android:layout_alignParentTop="true"
-             android:layout_marginTop="@dimen/dimen_15dp"
-             android:textSize="23sp"
-             android:id="@+id/txtMyOrders"
-             android:textColor="@color/green"
-             android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/mainLayout"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Orders"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:textSize="23sp"
+                android:id="@+id/txtMyOrders"
+                android:textColor="@color/green"
+                android:textStyle="bold" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/no_data_anim"
+                android:layout_width="@dimen/dimen_300_dp"
+                android:layout_height="@dimen/dimen_300_dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="130dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/no_orders_anim" />
+
+            <TextView
+                android:id="@+id/txtNoDataAnim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/no_data_anim"
+                android:layout_margin="@dimen/dimen_20dp"
+                android:layout_marginStart="15dp"
+                android:visibility="gone"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="center"
+                android:text="Sorry, No orders found. Place an order and know your tracking status here"
+                android:textColor="@color/green"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myOrdersRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtMyOrders"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:layout_marginBottom="100dp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/no_data_anim"
-            android:layout_width="@dimen/dimen_300_dp"
-            android:layout_height="@dimen/dimen_300_dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="130dp"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/no_orders_anim" />
-
-        <TextView
-            android:id="@+id/txtNoDataAnim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/no_data_anim"
-            android:layout_margin="@dimen/dimen_20dp"
-            android:layout_marginStart="15dp"
+            android:layout_centerInParent="true"
             android:visibility="gone"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:fontFamily="@font/lexend"
-            android:gravity="center"
-            android:text="Sorry, No orders found. Place an order and know your tracking status here"
-            android:textColor="@color/green"
-            android:textSize="18sp"
-            android:textStyle="normal" />
+            android:layout_marginTop="@dimen/dimen_250_dp"
+            app:lottie_rawRes="@raw/loading_anim"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:id="@+id/loadingAnim" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/myOrdersRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtMyOrders"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="@dimen/dimen_15dp"
-            android:visibility="visible" />
 
     </RelativeLayout>
+
 
 
 </androidx.core.widget.NestedScrollView>

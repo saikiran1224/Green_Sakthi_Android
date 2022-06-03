@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.View
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
@@ -39,6 +41,8 @@ class OTPActivity : AppCompatActivity() {
     lateinit var otpView: PinView
     lateinit var txtResendButton: TextView
 
+    lateinit var loadingLayout: RelativeLayout
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,8 @@ class OTPActivity : AppCompatActivity() {
         txtResendButton = findViewById(R.id.txt_resend)
 
         otpView = findViewById(R.id.otp_view)
+
+        loadingLayout = findViewById(R.id.loadingLayout)
 
         auth = Firebase.auth
 
@@ -144,6 +150,10 @@ class OTPActivity : AppCompatActivity() {
         otpView.doOnTextChanged { text, start, before, count ->
 
             if (text!!.length == 6) {
+
+                // showing Loading Layout VISIBLE
+                loadingLayout.visibility = View.VISIBLE
+
                 val codeEntered = otpView.text.toString()
                 verifyPhoneNumberWithCode(storedVerificationId, codeEntered)
             }
@@ -215,11 +225,18 @@ class OTPActivity : AppCompatActivity() {
                                     AppPreferences.customerName = customerData.customerName
                                     AppPreferences.customerPhone = customerData.phoneNumber
 
+                                    // disabling Loading Layout
+                                    loadingLayout.visibility = View.GONE
+
                                     // Since the user is already registered, move him directly to the Main Activity
                                     val intent = Intent(this, MainActivity::class.java)
                                     startActivity(intent)
+                                    finish()
                                 }
                             else {
+
+                                // disabling Loading Layout
+                                loadingLayout.visibility = View.GONE
 
                                 // User hasn't already registered - send him to Customer Name Activity
                                 val intent = Intent(this,CustomerNameActivity::class.java)
@@ -237,6 +254,10 @@ class OTPActivity : AppCompatActivity() {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
+
+                        // disabling Loading Layout
+                        loadingLayout.visibility = View.GONE
+
                         Toast.makeText(this, "Invalid OTP Entered!",Toast.LENGTH_LONG).show()
                     }
                     // Update UI
