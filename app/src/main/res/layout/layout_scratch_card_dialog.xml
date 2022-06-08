@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/dimen_15dp"
+    app:cardElevation="@dimen/dimen_10dp"
+    android:foreground="@android:color/transparent"
+    android:background="@android:color/transparent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="@dimen/dimen_15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Congratulations!"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtCashVoucher"
+                android:layout_width="200dp"
+                android:gravity="center|center_vertical"
+                android:layout_height="200dp"
+                android:background="@color/edt_bg"
+                android:textStyle="bold"
+                android:textSize="27sp"
+                android:textColor="@color/green"
+                android:layout_centerInParent="true"
+                android:text="Rs. 60 " />
+
+            <in.myinnos.androidscratchcard.ScratchCard
+                android:id="@+id/scratchCard"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                app:scratchDrawable="@drawable/scratch_here" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtVoucherDelivery"
+            android:visibility="invisible"
+            android:text="Physical Voucher will be given during the time of order delivery" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:id="@+id/btnThanks"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_17sp"
+            android:paddingStart="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingEnd="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_30_dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/green"
+            android:text="Yay, Thanks!" />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>

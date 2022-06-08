@@ -24,13 +24,64 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/success_anim" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:visibility="gone"
+            android:id="@+id/scratchCardLayout"
+            app:cardElevation="8dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="@dimen/dimen_10dp"
+            android:layout_below="@id/displayedAnim">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/dimen_10dp"
+                android:background="@color/edt_bg"
+                android:layout_height="match_parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/congratulations_anim"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="-8dp"
+                    android:layout_marginBottom="10dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/star_anim" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="15dp"
+                    android:layout_toEndOf="@id/congratulations_anim"
+                    android:gravity="center"
+                    android:text="You have won a Scratch Card!"
+                    android:textColor="@color/green"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView
             android:id="@+id/successMessageBig"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/displayedAnim"
+            android:layout_below="@id/scratchCardLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:text="Order Placed Successfully!"
             android:textColor="@color/green"
             android:textSize="22sp"
@@ -55,7 +106,7 @@
             android:layout_below="@id/messageSmall"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="@dimen/dimen_15dp"
             android:background="@drawable/button_bg"
             android:elevation="5dp"
@@ -66,19 +117,6 @@
             android:text="@string/click_here_for_b_my_orders_b_page"
             android:textColor="@color/white"
             android:textSize="15sp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </RelativeLayout>
 

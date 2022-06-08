@@ -107,7 +107,7 @@
             android:layout_below="@id/cashOnDeliveryCard"
             android:layout_alignParentStart="true"
             app:strokeColor="@color/green"
-            android:clickable="true"
+            android:clickable="false"
             android:foreground="?attr/selectableItemBackground"
             android:focusable="true"
             app:strokeWidth="1dp"
@@ -121,18 +121,31 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:background="@color/edt_bg"
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/txtPayAmountOnline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:layout_centerVertical="false"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="18dp"
                     android:fontFamily="@font/lexend"
                     android:text="Pay Amount Online"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPayAmountOnline"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/dimen_20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Coming Soon"
+                    android:textSize="@dimen/text_size_17sp" />
 
 
                 <com.google.android.material.card.MaterialCardView
@@ -141,7 +154,7 @@
                     android:layout_marginEnd="25dp"
                     android:layout_height="60dp"
                     app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/edt_bg"
+                    app:cardBackgroundColor="@color/white"
                     android:layout_marginStart="@dimen/dimen_15dp"
                     android:layout_centerVertical="true">
 

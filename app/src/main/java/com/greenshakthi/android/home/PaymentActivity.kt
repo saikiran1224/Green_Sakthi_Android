@@ -59,6 +59,9 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         onlinePaymentCard = findViewById(com.greenshakthi.android.R.id.OnlinePaymentCard)
         cashOnDeliveryCard = findViewById(com.greenshakthi.android.R.id.cashOnDeliveryCard)
 
+        // disabling the Online Payment Card
+        onlinePaymentCard.isEnabled = false
+
         db = Firebase.firestore
 
         alertDialogBuilder = AlertDialog.Builder(this@PaymentActivity)
@@ -136,7 +139,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
     override fun onExternalWalletSelected(p0: String?, paymentData: PaymentData?) {
         try {
 
-            placeOrder("Online", paymentData!!.paymentId.toString())
+            placeOrder("Online - External Wallet", paymentData!!.paymentId.toString())
 
           //  alertDialogBuilder!!.setMessage("Payment Successful :\nPayment ID: "+p0+"\nPayment Data: "+paymentData!!.getData())
           //  alertDialogBuilder!!.show()
@@ -171,6 +174,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
                 // Order placed successfully - redirect user to Order Success Page
                 val intent = Intent(this, PostPaymentPage::class.java)
+                intent.putExtra("quantitySelected",selectedQuantity)
                 intent.putExtra("status","Success")
                 startActivity(intent)
 
