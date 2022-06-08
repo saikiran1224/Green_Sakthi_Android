@@ -5,6 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.greenshakthi.android.R
+import com.greenshakthi.android.fragments.HomeFragment
+import com.greenshakthi.android.fragments.MyOrdersFragment
+import com.greenshakthi.android.fragments.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 

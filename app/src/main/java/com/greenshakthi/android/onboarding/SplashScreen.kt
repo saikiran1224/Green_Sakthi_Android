@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import android.widget.Toast
 import com.greenshakthi.android.R
 import com.greenshakthi.android.home.MainActivity
 import com.greenshakthi.android.utils.AppPreferences
@@ -24,6 +25,7 @@ class SplashScreen : AppCompatActivity() {
         Handler().postDelayed({
 
             if(AppPreferences.isLogin == true) {
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()

@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -22,10 +21,7 @@ import com.razorpay.ExternalWalletListener
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import org.json.JSONObject
-import java.lang.Math.abs
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.util.*
 
 
@@ -126,7 +122,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         try {
 
             // Some Error Occurred - redirect user to Order Status Page
-            val intent = Intent(this, OrderStatusPage::class.java)
+            val intent = Intent(this, PostPaymentPage::class.java)
             intent.putExtra("status","Failure")
             startActivity(intent)
 
@@ -174,7 +170,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
             .addOnSuccessListener {
 
                 // Order placed successfully - redirect user to Order Success Page
-                val intent = Intent(this, OrderStatusPage::class.java)
+                val intent = Intent(this, PostPaymentPage::class.java)
                 intent.putExtra("status","Success")
                 startActivity(intent)
 
@@ -218,7 +214,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         super.onBackPressed()
 
         // Some Error Occurred - redirect user to Order Status Page
-        val intent = Intent(this, OrderStatusPage::class.java)
+        val intent = Intent(this, PostPaymentPage::class.java)
         intent.putExtra("status","Failure")
         startActivity(intent)
     }
