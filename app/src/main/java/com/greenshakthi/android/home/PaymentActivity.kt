@@ -82,23 +82,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         txtBackButton.setOnClickListener {
 
             // showing Confirmation Dialog
-            MaterialAlertDialogBuilder(this)
-                .setTitle("Are you sure?")
-                .setCancelable(false)
-                .setMessage("The order will be cancelled and action could not be revesed")
-                .setNegativeButton("No") { dialog, which ->
-                    // Respond to negative button press
-                    dialog.dismiss()
-                }
-                .setPositiveButton("Yes") { dialog, which ->
-                    // Respond to positive button press
-
-                    dialog.dismiss()
-
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                .show()
+            showCancelPaymentDialog()
 
         }
 
@@ -107,6 +91,28 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         cashOnDeliveryCard.setOnClickListener { placeOrder("COD","0") }
 
 }
+
+    private fun showCancelPaymentDialog() {
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Are you sure?")
+            .setCancelable(false)
+            .setMessage("The order will be cancelled and action could not be revesed")
+            .setNegativeButton("No") { dialog, which ->
+                // Respond to negative button press
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yes") { dialog, which ->
+                // Respond to positive button press
+
+                dialog.dismiss()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            .show()
+
+    }
 
     override fun onPaymentSuccess(s: String?, paymentData: PaymentData?) {
         try {
@@ -215,11 +221,10 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+       // super.onBackPressed()
 
-        // Some Error Occurred - redirect user to Order Status Page
-        val intent = Intent(this, PostPaymentPage::class.java)
-        intent.putExtra("status","Failure")
-        startActivity(intent)
+        // Some Error Occurred - ask User for Confirmation
+        showCancelPaymentDialog()
+
     }
 }

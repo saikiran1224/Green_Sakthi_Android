@@ -1,12 +1,17 @@
 package com.greenshakthi.android.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -24,6 +29,8 @@ class MyOrdersFragment : Fragment() {
 
     lateinit var myOrdersRecycler: RecyclerView
     lateinit var myOrdersList: ArrayList<OrderData>
+    lateinit var sortedList: List<OrderData>
+    lateinit var myOrdersAdapter: MyOrdersAdapter
 
     private var customerUUID: String = ""
 
@@ -34,6 +41,8 @@ class MyOrdersFragment : Fragment() {
 
     lateinit var mainLayout: RelativeLayout
     lateinit var loadingAnim: LottieAnimationView
+
+    lateinit var edtSearchOrders: EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -47,6 +56,10 @@ class MyOrdersFragment : Fragment() {
         mainLayout = view.findViewById(R.id.mainLayout)
         loadingAnim = view.findViewById(R.id.loadingAnim)
 
+        edtSearchOrders = view.findViewById(R.id.edtSearchOrder)
+        // emptying the Edit Text
+        edtSearchOrders.setText("")
+
         txtNoDataAnim = view.findViewById(R.id.txtNoDataAnim)
         noDataAnim = view.findViewById(R.id.no_data_anim)
 
@@ -58,10 +71,31 @@ class MyOrdersFragment : Fragment() {
         mainLayout.visibility = View.GONE
         loadingAnim.visibility = View.VISIBLE
 
+        // loading Order Data
         loadOrdersData()
 
 
+        // search EditText Listener
+        edtSearchOrders.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                filter(s.toString())
+            }
+        })
+
+
         return view
+    }
+
+    private fun filter(text: String) {
+        val filteredlist: ArrayList<OrderData> = ArrayList()
+        for (item in sortedList) {
+            if (item.fuelQuantitySelected!!.toLowerCase().contains(text.toLowerCase()) || item.dateTimePlaced!!.toLowerCase().contains(text.toLowerCase()) || item.orderStatus!!.toLowerCase().contains(text.toLowerCase()) || item.fuelName!!.toLowerCase().contains(text.toLowerCase()) || item.finalPrice!!.toLowerCase().contains(text.toLowerCase()) || item.orderID!!.toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(item)
+            }
+        }
+        myOrdersAdapter.filterList(filteredlist)
     }
 
     private fun loadOrdersData() {
@@ -86,9 +120,9 @@ class MyOrdersFragment : Fragment() {
                     txtNoDataAnim.visibility = View.GONE
                     noDataAnim.visibility = View.GONE
 
-                    val sortedList = myOrdersList.sortedWith(compareByDescending { it.dateTimePlaced }, ) as List<OrderData>
+                    sortedList = myOrdersList.sortedWith(compareByDescending { it.dateTimePlaced }, ) as List<OrderData>
 
-                    val myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }
+                    myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }!!
                     val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
                     myOrdersRecycler.adapter = myOrdersAdapter
                     myOrdersRecycler.layoutManager = linearLayoutManager

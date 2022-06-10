@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firestore.v1.StructuredQuery
 import com.greenshakthi.android.R
 import com.greenshakthi.android.models.OrderData
+import java.util.ArrayList
 
-class MyOrdersAdapter(private val context: Context, private val myOrdersList: List<OrderData>):
+class MyOrdersAdapter(private val context: Context, private var myOrdersList: List<OrderData>):
     RecyclerView.Adapter<MyOrdersAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -52,6 +54,7 @@ class MyOrdersAdapter(private val context: Context, private val myOrdersList: Li
             }
 
             holder.txtTimeStamp.text = myOrdersList[position].dateTimePlaced
+
     }
 
     override fun getItemCount(): Int {
@@ -68,6 +71,13 @@ class MyOrdersAdapter(private val context: Context, private val myOrdersList: Li
         val transactionStatus = itemView.findViewById<TextView>(R.id.txtTransStatus)
         val txtTimeStamp = itemView.findViewById<TextView>(R.id.txtTimeStamp)
 
+    }
+
+    // filter method for Search Option
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(filteredList: List<OrderData?>) {
+        myOrdersList = filteredList as ArrayList<OrderData>
+        notifyDataSetChanged()
     }
 
 }
