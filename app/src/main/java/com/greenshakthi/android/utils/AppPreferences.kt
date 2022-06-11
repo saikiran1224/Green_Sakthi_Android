@@ -20,6 +20,8 @@ object AppPreferences {
     private val CUST_ADDRESS = Pair("custAddress","")
     private val CUST_PHONE = Pair("custPhone","")
 
+    private val REMIND_LATER = Pair("remindLater",true)
+
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
     }
@@ -36,6 +38,13 @@ object AppPreferences {
     }
 
     //SharedPreferences variables getters/setters
+    var remindLater: Boolean?
+        get() = preferences.getBoolean(REMIND_LATER.first, REMIND_LATER.second)
+        set(value) = preferences.edit {
+            it.putBoolean(REMIND_LATER.first, value!!)
+        }
+
+
     var isLogin: Boolean?
         get() = preferences.getBoolean(IS_LOGIN.first, IS_LOGIN.second)
         set(value) = preferences.edit {

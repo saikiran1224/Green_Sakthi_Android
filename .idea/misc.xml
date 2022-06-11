@@ -28,12 +28,13 @@
         <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/layout_scratch_card_dialog.xml" value="0.25" />
         <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/loading_layout.xml" value="0.24895833333333334" />
         <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/logout_dialog.xml" value="0.25" />
+        <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/layout/update_app_dialog.xml" value="0.25" />
         <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/menu/bottom_navigation.xml" value="0.25" />
         <entry key="..\:/Android Apps/GreenSakthi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
