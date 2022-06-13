@@ -97,6 +97,7 @@
             android:layout_marginStart="@dimen/dimen_20dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/dimen_20dp"
+            android:textColor="@color/light_gray"
             android:gravity="center"
             android:text="Your Order has been placed successfully. Please visit My Orders page to know the status of the order"
             android:textSize="@dimen/text_size_16sp" />

@@ -41,9 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/lexend"
             android:gravity="center"
             android:maxLines="2"
-            android:fontFamily="@font/lexend"
             android:text="Enter your Mobile Number"
             android:textColor="@color/verify_no"
             android:textSize="@dimen/text_size_17sp" />

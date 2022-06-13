@@ -117,7 +117,6 @@ class MainActivity : AppCompatActivity() {
             } catch (e: ActivityNotFoundException) {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
             }
-
         }
 
         updateAppDialog.findViewById<CardView>(R.id.btnRemindLater).setOnClickListener {

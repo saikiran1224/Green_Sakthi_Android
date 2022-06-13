@@ -6,12 +6,14 @@
     app:cardPreventCornerOverlap="true"
     android:foreground="@android:color/transparent"
     android:background="@android:color/transparent"
+    android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:padding="0dp"
+        android:background="@color/white"
         android:gravity="center"
         android:layout_height="wrap_content">
 
@@ -72,7 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnCancel"
-                android:textColor="@color/green"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/light_gray"
                 android:layout_marginStart="20dp"
                 android:text="Go Back"
                 android:layout_weight="1" />

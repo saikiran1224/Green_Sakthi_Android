@@ -20,8 +20,8 @@
     </style>
 
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
-        <item name="itemTextColor">@color/black</item>
-        <item name="itemIconTint">@color/black</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemIconTint">@color/white</item>
     </style>
 
 

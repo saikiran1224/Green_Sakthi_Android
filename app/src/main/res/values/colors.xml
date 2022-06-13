@@ -5,6 +5,8 @@
     <color name="green">#04701B</color>
     <color name="teal_200">#FF03DAC5</color>
 
+    <color name="light_gray">#7E7E7E</color>
+
     <color name="light_green">#EAFFEC</color>
     <color name="edt_bg">#CBE6CE</color>
     <color name="teal_700">#FF018786</color>
