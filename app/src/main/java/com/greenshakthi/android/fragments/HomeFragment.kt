@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.greenshakthi.android.BuildConfig
 import com.greenshakthi.android.R
 import com.greenshakthi.android.home.OrderCheckoutActivity
 import com.greenshakthi.android.models.FuelData
@@ -41,6 +42,7 @@ class HomeFragment : Fragment() {
     lateinit var db: FirebaseFirestore
 
     lateinit var mainLayout: RelativeLayout
+    lateinit var maintenanceLayout: RelativeLayout
     lateinit var loadingAnim: LottieAnimationView
 
     @SuppressLint("SetTextI18n", "CutPasteId")
@@ -55,6 +57,7 @@ class HomeFragment : Fragment() {
         txtCustomerName = view.findViewById(R.id.txtCustomerName)
 
         mainLayout = view.findViewById(R.id.mainLayout)
+        maintenanceLayout = view.findViewById(R.id.maintenanceLayout)
         loadingAnim = view.findViewById(R.id.loadingAnim)
 
         // Fuel Details
@@ -73,10 +76,30 @@ class HomeFragment : Fragment() {
 
         // making Loading layout visible
         mainLayout.visibility = View.GONE
+        maintenanceLayout.visibility = View.GONE
         loadingAnim.visibility = View.VISIBLE
 
-        // loading Fuel Details - Name and Price of the Fuel
-        loadFuelDetails()
+        // retrieving the details of Fuel Availability
+        db = Firebase.firestore
+
+        val docRef = db.collection("App_Utils").document("b7NJ1YMyH94VDv0ytR0h")
+        docRef.get().addOnSuccessListener {
+
+            val avbltyStatus = it.data!!.get("Availability").toString()
+
+            if (avbltyStatus == "Online")
+                loadFuelDetails()
+            else {
+
+                // Fuel is unavailable(OFFLINE) - show Maintenance Icon
+
+                loadingAnim.visibility = View.GONE
+                mainLayout.visibility = View.GONE
+
+                maintenanceLayout.visibility = View.VISIBLE
+
+            }
+        }
 
         // retrieving the Customer Name and setting in the greeting message
         val customerName = AppPreferences.customerName.toString()
@@ -210,9 +233,12 @@ class HomeFragment : Fragment() {
                 }
             }.addOnFailureListener {
 
-                // disabling the loading layout
-                loadingAnim.visibility = View.GONE
-                mainLayout.visibility = View.VISIBLE
+
+                loadingAnim.visibility = View.VISIBLE
+                maintenanceLayout.visibility = View.GONE
+
+                // disabling the Main Layout
+                mainLayout.visibility = View.GONE
 
                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
             }
@@ -228,5 +254,4 @@ class HomeFragment : Fragment() {
         startActivity(intent)
 
     }
-
 }

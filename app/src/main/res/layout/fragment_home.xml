@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:id="@+id/mainLayout"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_height="match_parent">
 
             <TextView
@@ -292,6 +292,46 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             android:id="@+id/loadingAnim" />
+
+        <!-- Maintenance Layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/maintenanceLayout"
+            android:visibility="visible"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/maintenanceAnim"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="250dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/maintenance_anim" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/maintenanceAnim"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="-95dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:lineHeight="@dimen/dimen_25dp"
+                android:text="We are currently closed for Maintenance!\nSorry for the inconvenience caused"
+                android:textColor="@color/green"
+                android:textSize="16.5sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
