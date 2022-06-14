@@ -30,6 +30,7 @@ class SplashScreen : AppCompatActivity() {
         // making Remind Later true such that the app checks for the version
         AppPreferences.remindLater = true
 
+
         //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         Handler().postDelayed({

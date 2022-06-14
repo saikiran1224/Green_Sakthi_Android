@@ -51,6 +51,10 @@ class OTPActivity : AppCompatActivity() {
         // initialising App Preferences
         AppPreferences.init(this)
 
+        // Checking Internet Connection
+        if(!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(this)
+
+
         txtOTPSentMsg = findViewById(R.id.txt_otp_verification)
         txtResendButton = findViewById(R.id.txt_resend)
 
@@ -149,15 +153,20 @@ class OTPActivity : AppCompatActivity() {
         // Instead of a Button, once the user enters all the characters the below function gets invoked
         otpView.doOnTextChanged { text, start, before, count ->
 
-            if (text!!.length == 6) {
+            if(!AppPreferences.isOnline())
+                AppPreferences.showToast(this, "There is No Internet Connection. Please check your Wifi or Mobile Data once.")
 
-                // showing Loading Layout VISIBLE
-                loadingLayout.visibility = View.VISIBLE
+            else {
 
-                val codeEntered = otpView.text.toString()
-                verifyPhoneNumberWithCode(storedVerificationId, codeEntered)
+                if (text!!.length == 6) {
+
+                    // showing Loading Layout VISIBLE
+                    loadingLayout.visibility = View.VISIBLE
+
+                    val codeEntered = otpView.text.toString()
+                    verifyPhoneNumberWithCode(storedVerificationId, codeEntered)
+                }
             }
-
         }
     }
 
@@ -242,6 +251,7 @@ class OTPActivity : AppCompatActivity() {
                                 val intent = Intent(this,CustomerNameActivity::class.java)
                                 intent.putExtra("phoneNumber", phoneNumber)
                                 startActivity(intent)
+                                finish()
 
                             }
                         }
@@ -265,4 +275,8 @@ class OTPActivity : AppCompatActivity() {
             }
     }
     // [END sign_in_with_phone]
+
+    override fun onBackPressed() {
+        // Disabling onBackPress
+    }
 }

@@ -44,7 +44,6 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
     lateinit var db: FirebaseFirestore
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.greenshakthi.android.R.layout.activity_payment)
@@ -52,7 +51,11 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         // Razorpay initialise
         Checkout.preload(this)
 
+        // initialising App Preferences
         AppPreferences.init(this)
+
+        // Checking Internet Connection
+        if (!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(this)
 
         txtBackButton = findViewById(com.greenshakthi.android.R.id.txtBackButton)
 
@@ -67,13 +70,14 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         alertDialogBuilder = AlertDialog.Builder(this@PaymentActivity)
         alertDialogBuilder!!.setCancelable(false)
         alertDialogBuilder!!.setTitle("Payment Result")
-        alertDialogBuilder!!.setPositiveButton("Ok", DialogInterface.OnClickListener {
-                dialog: DialogInterface?, which: Int ->
-            // do nothing
-        })
+        alertDialogBuilder!!.setPositiveButton(
+            "Ok",
+            DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
+                // do nothing
+            })
 
         val intent = intent
-        finalPrice = "%.2f".format(intent.getFloatExtra("finalPrice",0.00f)).toString()
+        finalPrice = "%.2f".format(intent.getFloatExtra("finalPrice", 0.00f)).toString()
         customerAddress = intent.getStringExtra("custAddress").toString().trim()
         fuelName = intent.getStringExtra("fuelName").toString()
         fuelUnitPrice = intent.getStringExtra("fuelUnitPrice").toString()
@@ -86,10 +90,28 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
         }
 
-        onlinePaymentCard.setOnClickListener { startPayment(finalPrice) }
+        onlinePaymentCard.setOnClickListener {
 
-        cashOnDeliveryCard.setOnClickListener { placeOrder("COD","0") }
+            if (!AppPreferences.isOnline())
+                AppPreferences.showToast(
+                    this,
+                    "There is No Internet Connection. Please check your Wifi or Mobile Data once."
+                )
+            else
+                startPayment(finalPrice)
+        }
 
+        cashOnDeliveryCard.setOnClickListener {
+
+            if (!AppPreferences.isOnline())
+                AppPreferences.showToast(
+                    this,
+                    "There is No Internet Connection. Please check your Wifi or Mobile Data once."
+                )
+            else
+                placeOrder("COD", "0")
+
+        }
 }
 
     private fun showCancelPaymentDialog() {
@@ -109,6 +131,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             }
             .show()
 
@@ -134,6 +157,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
             val intent = Intent(this, PostPaymentPage::class.java)
             intent.putExtra("status","Failure")
             startActivity(intent)
+            finish()
 
            // alertDialogBuilder!!.setMessage("Payment Failed:\nPayment Data: "+paymentData!!.getData())
            // alertDialogBuilder!!.show()
@@ -183,6 +207,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
                 intent.putExtra("quantitySelected",selectedQuantity)
                 intent.putExtra("status","Success")
                 startActivity(intent)
+                finish()
 
             }
     }

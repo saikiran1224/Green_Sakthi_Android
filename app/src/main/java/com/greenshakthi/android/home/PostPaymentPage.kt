@@ -16,6 +16,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.card.MaterialCardView
 import com.greenshakthi.android.R
+import com.greenshakthi.android.utils.AppPreferences
 
 
 class PostPaymentPage : AppCompatActivity() {
@@ -38,6 +39,12 @@ class PostPaymentPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_payment_page)
+
+        // initialising App Preferences
+        AppPreferences.init(this)
+
+        // Checking Internet Connection
+        if (!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(this)
 
         txtMyOrdersButton = findViewById(R.id.txt_myOrdersPage)
 
@@ -82,6 +89,7 @@ class PostPaymentPage : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
 
         }
 
@@ -136,5 +144,9 @@ class PostPaymentPage : AppCompatActivity() {
 
             scratchCardDialog.show()
         }
+    }
+
+    override fun onBackPressed() {
+
     }
 }

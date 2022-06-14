@@ -29,6 +29,9 @@ class CustomerNameActivity : AppCompatActivity() {
         // initialsing App Preferences
         AppPreferences.init(this)
 
+        // Checking Internet Connection
+        if(!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(this)
+
         db = Firebase.firestore
 
         txtNext = findViewById(R.id.txt_next)
@@ -42,29 +45,37 @@ class CustomerNameActivity : AppCompatActivity() {
                 Toast.makeText(this,"Please enter Valid Name",Toast.LENGTH_LONG).show()
             else {
 
-                // Pass details to Cloud Firestore - Name and Phone Number
-                val custID = UUID.randomUUID().toString()
-                val phoneNumber = intent.getStringExtra("phoneNumber")
+                if (!AppPreferences.isOnline())
+                    AppPreferences.showToast(this, "There is No Internet Connection. Please check your Wifi or Mobile Data once.")
+                else {
 
-                val customerData = UserData(custID,enteredName,phoneNumber.toString())
-                db.collection("Customer_Data")
-                    .add(customerData)
-                    .addOnSuccessListener {
+                    // Pass details to Cloud Firestore - Name and Phone Number
+                    val custID = UUID.randomUUID().toString()
+                    val phoneNumber = intent.getStringExtra("phoneNumber")
 
-                        Toast.makeText(this,"Congratulations, You are Registered Successfully!",Toast.LENGTH_LONG).show()
+                    val customerData = UserData(custID, enteredName, phoneNumber.toString())
+                    db.collection("Customer_Data")
+                        .add(customerData)
+                        .addOnSuccessListener {
 
-                        // Setting the details of the Customer globally
-                        AppPreferences.isLogin = true
-                        AppPreferences.customerID = custID
-                        AppPreferences.customerName = enteredName
-                        AppPreferences.customerPhone = phoneNumber
+                            Toast.makeText(
+                                this,
+                                "Congratulations, You are Registered Successfully!",
+                                Toast.LENGTH_LONG
+                            ).show()
 
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("customerName",enteredName)
-                        startActivity(intent)
-                    }
+                            // Setting the details of the Customer globally
+                            AppPreferences.isLogin = true
+                            AppPreferences.customerID = custID
+                            AppPreferences.customerName = enteredName
+                            AppPreferences.customerPhone = phoneNumber
 
-
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra("customerName", enteredName)
+                            startActivity(intent)
+                            finish()
+                        }
+                }
             }
 
         }

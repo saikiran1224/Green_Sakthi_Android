@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -47,6 +48,9 @@ class OrderCheckoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_address_details)
 
         AppPreferences.init(this)
+
+        // Checking Internet Connection
+        if(!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(this)
 
         // initialising Firestore
         db = Firebase.firestore
@@ -102,11 +106,15 @@ class OrderCheckoutActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter Address", Toast.LENGTH_LONG).show()
             else {
 
-                // saving/overwriting the Address
-                AppPreferences.customerAddress = addressEntered
+                if (!AppPreferences.isOnline())
+                    AppPreferences.showToast(this, "There is No Internet Connection. Please check your Wifi or Mobile Data once.")
+                else {
+                    // saving/overwriting the Address
+                    AppPreferences.customerAddress = addressEntered
 
-                //checking whether there is a change in fuelUnitPrice
-                checkFuelUnitPriceDetails(addressEntered, txtFuelPrice.text.split(" ")[1])
+                    //checking whether there is a change in fuelUnitPrice
+                    checkFuelUnitPriceDetails(addressEntered, txtFuelPrice.text.split(" ")[1])
+                }
 
             }
         }
@@ -137,6 +145,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
                         intent.putExtra("custAddress",addressEntered)
                         intent.putExtra("finalPrice", finalPrice)
                         startActivity(intent)
+                        finish()
 
                     }  else {
 
@@ -145,6 +154,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
 
                         val intent_back = Intent(this, MainActivity::class.java)
                         startActivity(intent_back)
+
 
                     }
                 }

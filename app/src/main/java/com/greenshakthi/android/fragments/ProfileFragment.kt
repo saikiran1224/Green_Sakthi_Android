@@ -29,6 +29,9 @@ class ProfileFragment : Fragment() {
 
         AppPreferences.init(requireContext())
 
+        // Checking Internet Connection
+        if(!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(requireContext())
+
         txtCustomerName = view.findViewById(R.id.txtCustName)
         txtCustomerPhone = view.findViewById(R.id.txtCustPhone)
 
@@ -56,7 +59,7 @@ class ProfileFragment : Fragment() {
                 // redirecting back to Get Started Page
                 val intent = Intent(requireContext(), GetStartedActivity::class.java)
                 startActivity(intent)
-
+                requireActivity().finish()
 
             }
 

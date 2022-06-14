@@ -1,11 +1,11 @@
 package com.greenshakthi.android.utils
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.widget.Toast
-import java.text.Format
-import java.text.NumberFormat
-import java.util.*
+import androidx.core.content.ContextCompat.startActivity
+import java.io.IOException
 
 object AppPreferences {
 
@@ -33,8 +33,29 @@ object AppPreferences {
         editor.apply()
     }
 
+    // TCP/HTTP/DNS (depending on the port, 53=DNS, 80=HTTP, etc.)
+    fun isOnline(): Boolean {
+        val runtime = Runtime.getRuntime()
+        try {
+            val ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8")
+            val exitValue = ipProcess.waitFor()
+            return exitValue == 0
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        return false
+    }
+
+    fun showNetworkErrorPage(context: Context) {
+
+        val intent = Intent(context, NetworkErrorActivity::class.java)
+        context.startActivity(intent)
+    }
+
     fun showToast(context: Context, message: String?) {
-        Toast.makeText(context,message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context,message, Toast.LENGTH_SHORT).show()
     }
 
     //SharedPreferences variables getters/setters

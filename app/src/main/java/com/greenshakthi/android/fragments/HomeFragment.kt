@@ -51,6 +51,9 @@ class HomeFragment : Fragment() {
         // initialising App Preferences for Customer Name
         AppPreferences.init(requireContext())
 
+        // Checking Internet Connection
+        if(!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(requireContext())
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 

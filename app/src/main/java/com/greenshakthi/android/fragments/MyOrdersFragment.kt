@@ -32,6 +32,8 @@ class MyOrdersFragment : Fragment() {
     lateinit var sortedList: List<OrderData>
     lateinit var myOrdersAdapter: MyOrdersAdapter
 
+    lateinit var txtMyOrders: TextView
+
     private var customerUUID: String = ""
 
     lateinit var noDataAnim: LottieAnimationView
@@ -51,10 +53,15 @@ class MyOrdersFragment : Fragment() {
 
         AppPreferences.init(requireContext())
 
+        // Checking Internet Connection
+        if(!AppPreferences.isOnline()) AppPreferences.showNetworkErrorPage(requireContext())
+
         customerUUID = AppPreferences.customerID.toString()
 
         mainLayout = view.findViewById(R.id.mainLayout)
         loadingAnim = view.findViewById(R.id.loadingAnim)
+
+        txtMyOrders = view.findViewById(R.id.txtMyOrders)
 
         edtSearchOrders = view.findViewById(R.id.edtSearchOrder)
         // emptying the Edit Text
@@ -115,8 +122,16 @@ class MyOrdersFragment : Fragment() {
 
                 if(!myOrdersList.isEmpty()) {
 
-                    myOrdersRecycler.visibility = View.VISIBLE
+                    // Disabling the loading Animation
+                    loadingAnim.visibility = View.GONE
+                    mainLayout.visibility = View.VISIBLE
 
+                    // Since the order data is present - Show the Recycler View
+                    myOrdersRecycler.visibility = View.VISIBLE
+                    edtSearchOrders.visibility = View.VISIBLE
+                    txtMyOrders.visibility = View.VISIBLE
+
+                    // Disabling the No Data Anim
                     txtNoDataAnim.visibility = View.GONE
                     noDataAnim.visibility = View.GONE
 
@@ -125,22 +140,24 @@ class MyOrdersFragment : Fragment() {
                     myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }!!
                     val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
                     myOrdersRecycler.adapter = myOrdersAdapter
+                    myOrdersRecycler.setHasFixedSize(true)
                     myOrdersRecycler.layoutManager = linearLayoutManager
 
 
-                    loadingAnim.visibility = View.GONE
-                    mainLayout.visibility = View.VISIBLE
-
                 } else {
 
+                    // Disabling the loading Animation
                     loadingAnim.visibility = View.GONE
                     mainLayout.visibility = View.VISIBLE
-                      
-                    // No Data in MyOrders
+
+                    // Disabling the Recycler View
+                    myOrdersRecycler.visibility = View.GONE
+                    edtSearchOrders.visibility = View.GONE
+                    txtMyOrders.visibility = View.GONE
+
+                    // No Data in MyOrders - Disable My Orders Text and Edit Text
                     txtNoDataAnim.visibility = View.VISIBLE
                     noDataAnim.visibility = View.VISIBLE
-
-                    myOrdersRecycler.visibility = View.GONE
 
                   //  Toast.makeText(context, "Sorry, No Orders found!", Toast.LENGTH_SHORT).show()
                 }

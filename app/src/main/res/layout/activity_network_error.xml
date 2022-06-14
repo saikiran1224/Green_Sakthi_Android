@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".utils.NetworkErrorActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/light_green"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/noInternetAnim"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="-40dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/no_internet_anim" />
+
+        <TextView
+            android:id="@+id/txtConnErr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noInternetAnim"
+            android:layout_centerHorizontal="true"
+            android:text="Connection Error"
+            android:textColor="@color/green"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="There is no Internet Connection. Please check both Wifi/Mobile Data or try again later."
+            android:gravity="center"
+            android:layout_below="@id/txtConnErr"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:textColor="@color/light_gray"
+            android:textSize="15sp"
+            android:id="@+id/txtDesc"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginEnd="@dimen/dimen_15dp" />
+
+        <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDesc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimen_50_dp"
+            android:layout_marginBottom="100dp"
+            android:background="@color/light_gray"
+            android:elevation="10dp"
+            android:text="Retry"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
