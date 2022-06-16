@@ -51,6 +51,8 @@ class MyOrdersFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_my_orders, container, false)
 
+        //retainInstance = true
+
         AppPreferences.init(requireContext())
 
         // Checking Internet Connection
@@ -138,7 +140,7 @@ class MyOrdersFragment : Fragment() {
                     sortedList = myOrdersList.sortedWith(compareByDescending { it.dateTimePlaced }, ) as List<OrderData>
 
                     myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }!!
-                    val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+                    val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     myOrdersRecycler.adapter = myOrdersAdapter
                     myOrdersRecycler.setHasFixedSize(true)
                     myOrdersRecycler.layoutManager = linearLayoutManager
