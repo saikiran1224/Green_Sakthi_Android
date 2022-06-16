@@ -23,14 +23,17 @@ import com.greenshakthi.android.adapters.MyOrdersAdapter
 import com.greenshakthi.android.R
 import com.greenshakthi.android.models.OrderData
 import com.greenshakthi.android.utils.AppPreferences
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MyOrdersFragment : Fragment() {
 
 
     lateinit var myOrdersRecycler: RecyclerView
     lateinit var myOrdersList: ArrayList<OrderData>
-    lateinit var sortedList: List<OrderData>
-    lateinit var myOrdersAdapter: MyOrdersAdapter
+
+    /*lateinit var sortedList: List<OrderData>
+    lateinit var myOrdersAdapter: MyOrdersAdapter*/
 
     lateinit var txtMyOrders: TextView
 
@@ -84,19 +87,10 @@ class MyOrdersFragment : Fragment() {
         loadOrdersData()
 
 
-        // search EditText Listener
-        edtSearchOrders.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) {
-                filter(s.toString())
-            }
-        })
-
-
         return view
     }
 
+/*
     private fun filter(text: String) {
         val filteredlist: ArrayList<OrderData> = ArrayList()
         for (item in sortedList) {
@@ -105,7 +99,7 @@ class MyOrdersFragment : Fragment() {
             }
         }
         myOrdersAdapter.filterList(filteredlist)
-    }
+    }*/
 
     private fun loadOrdersData() {
 
@@ -137,13 +131,40 @@ class MyOrdersFragment : Fragment() {
                     txtNoDataAnim.visibility = View.GONE
                     noDataAnim.visibility = View.GONE
 
-                    sortedList = myOrdersList.sortedWith(compareByDescending { it.dateTimePlaced }, ) as List<OrderData>
+                    val sortedList = myOrdersList.sortedWith(compareByDescending { it.dateTimePlaced }, ) as List<OrderData>
 
-                    myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }!!
+                    val myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }!!
                     val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     myOrdersRecycler.adapter = myOrdersAdapter
                     myOrdersRecycler.setHasFixedSize(true)
                     myOrdersRecycler.layoutManager = linearLayoutManager
+
+                    // Search Option
+
+                    // search EditText Listener
+                    edtSearchOrders.addTextChangedListener(object : TextWatcher {
+                        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+                        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+                        override fun afterTextChanged(s: Editable) {
+
+                            // filtering the data based on the search phrase
+                            val filteredlist: ArrayList<OrderData> = ArrayList()
+                            for (item in sortedList) {
+                                if (item.fuelQuantitySelected.lowercase(Locale.getDefault()).contains(s.toString().lowercase(Locale.getDefault())) ||
+                                    item.dateTimePlaced.lowercase(Locale.getDefault()).contains(s.toString().lowercase(Locale.getDefault())) ||
+                                    item.orderStatus.lowercase(Locale.getDefault()).contains(s.toString().lowercase(Locale.getDefault())) ||
+                                    item.fuelName.lowercase(Locale.getDefault()).contains(s.toString().lowercase(Locale.getDefault())) ||
+                                    item.finalPrice.lowercase(Locale.getDefault()).contains(s.toString().lowercase(Locale.getDefault())) ||
+                                    item.orderID.lowercase(Locale.getDefault()).contains(s.toString().lowercase(Locale.getDefault()))) {
+
+                                          filteredlist.add(item)
+
+                                }
+                            }
+                            myOrdersAdapter.filterList(filteredlist)
+
+                        }
+                    })
 
 
                 } else {

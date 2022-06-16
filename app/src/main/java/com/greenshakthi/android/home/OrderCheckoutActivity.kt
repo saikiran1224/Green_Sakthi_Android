@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,7 +18,7 @@ import com.google.firebase.ktx.Firebase
 import com.greenshakthi.android.R
 import com.greenshakthi.android.models.FuelData
 import com.greenshakthi.android.utils.AppPreferences
-import org.w3c.dom.Text
+import nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
 
 class OrderCheckoutActivity : AppCompatActivity() {
 
@@ -41,11 +41,21 @@ class OrderCheckoutActivity : AppCompatActivity() {
     lateinit var db: FirebaseFirestore
 
     private var fuelUnitPrice: String = ""
+    
+    // Vehicle
+    lateinit var vehicleDetailsLayout: LinearLayout
+    lateinit var edtVehicleName: EditText
+    lateinit var edtModelNumber: EditText
+
+    // Themed Button Group
+    lateinit var btnToggleGeneratorVehicle: ThemedToggleButtonGroup
+
+    var orderedFor: String = ""
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_address_details)
+        setContentView(R.layout.activity_order_checkout)
 
         AppPreferences.init(this)
 
@@ -71,11 +81,17 @@ class OrderCheckoutActivity : AppCompatActivity() {
 
         proceedToPaymentCard = findViewById(R.id.proceedToPaymentCard)
 
+        vehicleDetailsLayout = findViewById(R.id.vehicleDetailsLayout)
+
+        edtVehicleName = findViewById(R.id.edtVehicleName)
+        edtModelNumber = findViewById(R.id.edtModelNumber)
+
+        btnToggleGeneratorVehicle = findViewById(R.id.btnToggleGeneratorVehicle)
+
         // checking whether already the address is present
         val prevAddress = AppPreferences.customerAddress.toString()
         if (prevAddress.isNotEmpty())
             edtAddress.setText(prevAddress)
-
 
         txtBackButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -98,24 +114,72 @@ class OrderCheckoutActivity : AppCompatActivity() {
         txtShippingCharges_Price.text = "₹ 0.00"
         txtTotal_Price.text = "₹ " + "%.2f".format(intent.getFloatExtra("finalPrice", 0.00f))
 
+
+        // You're Ordering for
+        btnToggleGeneratorVehicle.setOnSelectListener {
+
+            // As per the info - Name, Model No is not required
+            // For Generator hide the Vehicle details layout
+            // For Vehicle show the vehicle details layout
+            if (it.isSelected) {
+
+                when (it.text.toString().trim()) {
+
+                    "My Generator" -> {
+
+                        // updating the global attribute
+                        orderedFor = "My Generator"
+
+                        // hiding the vehicle details layout
+                        vehicleDetailsLayout.visibility = View.GONE
+                        vehicleDetailsLayout.isEnabled = false
+                    }
+
+                    "My Vehicle" -> {
+
+                        // updating the global attribute
+                        orderedFor = "My Vehicle"
+
+                        // showing the vehicle details layout
+                        vehicleDetailsLayout.visibility = View.VISIBLE
+                        vehicleDetailsLayout.isEnabled = true
+                    }
+                    else -> recreate()
+                }
+
+            }
+
+        }
+
+
         proceedToPaymentCard.setOnClickListener {
 
             val addressEntered = edtAddress.text.toString().trim()
+            val vehicleName = edtVehicleName.text.toString().trim()
+            val modelNumber = edtModelNumber.text.toString().trim()
 
             if(addressEntered.isEmpty())
                 Toast.makeText(this, "Please enter Address", Toast.LENGTH_LONG).show()
+            else if(orderedFor.isEmpty())
+                Toast.makeText(this, "Please choose what you're ordering for", Toast.LENGTH_LONG).show()
+            else if((orderedFor == "My Vehicle") and vehicleName.isEmpty())
+                Toast.makeText(this, "Please enter Vehicle Name", Toast.LENGTH_LONG).show()
+            else if((orderedFor == "My Vehicle") and modelNumber.isEmpty())
+                    Toast.makeText(this, "Please enter Model Number", Toast.LENGTH_LONG).show()
             else {
-
                 if (!AppPreferences.isOnline())
                     AppPreferences.showToast(this, "There is No Internet Connection. Please check your Wifi or Mobile Data once.")
                 else {
                     // saving/overwriting the Address
                     AppPreferences.customerAddress = addressEntered
 
-                    //checking whether there is a change in fuelUnitPrice
-                    checkFuelUnitPriceDetails(addressEntered, txtFuelPrice.text.split(" ")[1])
-                }
+                    // We are passing N/A as parameter for Generator
+                    if(orderedFor == "My Generator")
+                        checkFuelUnitPriceDetails(addressEntered, txtFuelPrice.text.split(" ")[1], "My Generator","N/A","N/A")
+                    else
+                        checkFuelUnitPriceDetails(addressEntered, txtFuelPrice.text.split(" ")[1], orderedFor,vehicleName,modelNumber)
 
+                }
             }
         }
 
@@ -123,7 +187,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
 
 
     @SuppressLint("SetTextI18n")
-    private fun checkFuelUnitPriceDetails(addressEntered: String, oldFuelPrice: String) {
+    private fun checkFuelUnitPriceDetails(addressEntered: String, oldFuelPrice: String, orderedFor: String, vehicleName: String, modelNumber: String) {
         db = Firebase.firestore
         db.collection("Fuels_Data")
             .get()
@@ -141,6 +205,9 @@ class OrderCheckoutActivity : AppCompatActivity() {
                         val intent = Intent(this, PaymentActivity::class.java)
                         intent.putExtra("fuelName", txtFuelTitle.text.toString())
                         intent.putExtra("fuelUnitPrice",txtFuelPrice.text.toString())
+                        intent.putExtra("orderedFor", orderedFor.toString())
+                        intent.putExtra("vehicleName", vehicleName.toString())
+                        intent.putExtra("modelNumber", modelNumber.toString())
                         intent.putExtra("selectedQuantity",quantityValue)
                         intent.putExtra("custAddress",addressEntered)
                         intent.putExtra("finalPrice", finalPrice)

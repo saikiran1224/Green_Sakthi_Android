@@ -87,25 +87,25 @@
                 android:id="@+id/txtFuelPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/light_gray"
                 android:layout_below="@id/txtFuelTitle"
                 android:layout_marginStart="@dimen/dimen_20dp"
                 android:layout_marginTop="6dp"
                 android:layout_toEndOf="@id/imageCardView"
                 android:fontFamily="@font/lexend"
-                android:text="₹ 96.0 per Litre"
+                android:text="₹ N/A per Litre"
+                android:textColor="@color/light_gray"
                 android:textSize="@dimen/text_size_17sp" />
 
             <TextView
+                android:id="@+id/selectedQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtFuelPrice"
-                android:id="@+id/selectedQuantity"
                 android:layout_marginStart="@dimen/dimen_20dp"
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_toEndOf="@id/imageCardView"
                 android:fontFamily="@font/lexend"
-                android:text="Quantity: 1000 Litres"
+                android:text="Quantity: 0 Litres"
                 android:textColor="@color/darkgreen"
                 android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold" />
@@ -158,9 +158,116 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Info"
+            android:text="You're ordering for"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="20dp"
+            android:textColor="@color/green"
+            android:fontFamily="@font/lexend"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+            android:id="@+id/btnToggleGeneratorVehicle"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            app:toggle_horizontalSpacing="@dimen/dimen_15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            app:justifyContent="center"> <!-- this attribute is from the underlying FlexboxLayout -->
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:id="@+id/btn_generator"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                app:toggle_backgroundColor="@color/edt_bg"
+                app:toggle_selectedBackgroundColor="@color/green"
+                app:toggle_text="  My Generator  " />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:id="@+id/btn_vehicle"
+                android:layout_width="wrap_content"
+                app:toggle_backgroundColor="@color/edt_bg"
+                app:toggle_selectedBackgroundColor="@color/green"
+                android:layout_height="45dp"
+                app:toggle_text="  My Vehicle  " />
+
+        </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+        <!--Vehicle Details Layout-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/vehicleDetailsLayout"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/vehicleNameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="@drawable/mobile_num_bg"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtVehicleName"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/ic_baseline_directions_car_24"
+                    android:fontFamily="@font/lexend"
+                    android:drawableTint="@color/green"
+                    android:gravity="center_vertical"
+                    android:hint="Name of Vehicle E.g WagonR"
+                    android:paddingStart="3dp"
+                    android:drawablePadding="10dp"
+                    android:inputType="text"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_17sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/modelNumberLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="@drawable/mobile_num_bg"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtModelNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lexend"
+                    android:hint="Model No E.g BS-IV, etc."
+                    android:drawableStart="@drawable/ic_baseline_notes_24"
+                    android:inputType="text"
+                    android:paddingStart="3dp"
+                    android:drawablePadding="@dimen/dimen_10dp"
+                    android:drawableTint="@color/green"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_17sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Info"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="25dp"
             android:textColor="@color/green"
             android:fontFamily="@font/lexend"
             android:textSize="20sp"
@@ -189,10 +296,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/dimen_10dp"
-                android:textColor="@color/light_gray"
                 android:layout_marginEnd="18dp"
                 android:fontFamily="@font/lexend"
-                android:text="₹ 1500.0"
+                android:text="₹ N/A"
+                android:textColor="@color/light_gray"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -256,7 +363,7 @@
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_marginEnd="18dp"
                 android:fontFamily="@font/lexend"
-                android:text="₹ 1500.0"
+                android:text="₹ N/A"
                 android:textColor="@color/green"
                 android:textSize="20sp"
                 android:textStyle="bold" />

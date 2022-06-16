@@ -41,6 +41,9 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
     private var fuelName: String = ""
     private var fuelUnitPrice: String = ""
     private var selectedQuantity: String = ""
+    private var orderedFor: String = ""
+    private var vehicleName: String = ""
+    private var modelNumber: String = ""
 
     lateinit var db: FirebaseFirestore
 
@@ -82,6 +85,10 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         fuelName = intent.getStringExtra("fuelName").toString()
         fuelUnitPrice = intent.getStringExtra("fuelUnitPrice").toString()
         selectedQuantity = intent.getStringExtra("selectedQuantity").toString()
+
+        orderedFor = intent.getStringExtra("orderedFor").toString()
+        vehicleName = intent.getStringExtra("vehicleName").toString()
+        modelNumber = intent.getStringExtra("modelNumber").toString()
 
         txtBackButton.setOnClickListener {
 
@@ -195,7 +202,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
         val currentDateTime = sdf.format(Date())
 
 
-        val orderData = OrderData(order_id,currentDateTime,finalPrice,customerAddress,"Placed",transactionMode, paymentID, fuelName, fuelUnitPrice, selectedQuantity, AppPreferences.customerName.toString(), AppPreferences.customerPhone.toString(), AppPreferences.customerID.toString(),key)
+        val orderData = OrderData(order_id,currentDateTime,finalPrice,customerAddress,"Placed",transactionMode, paymentID, fuelName, fuelUnitPrice, selectedQuantity, AppPreferences.customerName.toString(), AppPreferences.customerPhone.toString(), AppPreferences.customerID.toString(),key, orderedFor, vehicleName, modelNumber)
 
         db.collection("Orders_Data")
             .document(key)

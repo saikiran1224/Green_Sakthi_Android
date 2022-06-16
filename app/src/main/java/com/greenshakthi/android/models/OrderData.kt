@@ -14,5 +14,8 @@ data class OrderData(
     var custName: String = "",
     var custPhone: String = "",
     var custID: String = "",
-    var key: String = ""
+    var key: String = "",
+    var orderedFor: String = "",
+    var vehicleName: String = "",
+    var modelNumber: String = ""
 )

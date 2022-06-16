@@ -68,5 +68,7 @@ dependencies {
     // Scratch Card
     implementation 'com.github.myinnos:AndroidScratchCard:v1.0'
 
+    // Toggle Button group
+    implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
 
 }
