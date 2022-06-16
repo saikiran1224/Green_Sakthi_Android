@@ -35,12 +35,12 @@ class ProfileFragment : Fragment() {
         txtCustomerName = view.findViewById(R.id.txtCustName)
         txtCustomerPhone = view.findViewById(R.id.txtCustPhone)
 
-        txtLogoutBtn = view.findViewById(R.id.txtLogout)
+        //txtLogoutBtn = view.findViewById(R.id.txtLogout)
 
         txtCustomerName.text = AppPreferences.customerName.toString()
         txtCustomerPhone.text = AppPreferences.customerPhone.toString()
 
-        txtLogoutBtn.setOnClickListener {
+       /* txtLogoutBtn.setOnClickListener {
 
             val logoutDialog = Dialog(requireContext())
             logoutDialog.setContentView(R.layout.logout_dialog)
@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
 
             logoutDialog.show()
 
-        }
+        }*/
 
 
         return view

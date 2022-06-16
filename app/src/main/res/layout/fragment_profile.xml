@@ -7,20 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <TextView
+       <!-- <TextView
+            android:id="@+id/txtManageProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Manage Profile"
-            android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_15dp"
-            android:textSize="23sp"
-            android:id="@+id/txtManageProfile"
+            android:text="Manage Profile"
             android:textColor="@color/green"
+            android:textSize="23sp"
             android:textStyle="bold" />
 
 
@@ -97,6 +98,57 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/edt_bg">
+
+
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dimen_40_dp"
+                android:src="@drawable/ic_profile_illustration"
+                app:tint="@color/green" />
+
+            <TextView
+                android:id="@+id/txtCustName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profileIcon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:text="Sai Kiran Kopparthi"
+                android:textColor="@color/green"
+                android:textSize="18.5sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_50_dp"
+            android:drawableStart="@drawable/ic_baseline_local_phone_24"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:drawableTint="@color/green"
+            android:text="+91 9381384234"
+            android:textStyle="normal"
+            android:textSize="19sp"
+            android:gravity="top|center_vertical"
+            android:id="@+id/txtCustPhone"
+            android:drawablePadding="@dimen/dimen_20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:background="#48A8A8A8" />
 
 
 
@@ -110,8 +162,7 @@
 
 
 
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </androidx.core.widget.NestedScrollView>
