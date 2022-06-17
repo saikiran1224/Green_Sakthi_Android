@@ -17,7 +17,6 @@ import com.greenshakthi.android.R
 import com.greenshakthi.android.onboarding.GetStartedActivity
 import com.greenshakthi.android.utils.AppPreferences
 
-
 class ProfileFragment : Fragment() {
 
     lateinit var txtCustomerName: TextView
