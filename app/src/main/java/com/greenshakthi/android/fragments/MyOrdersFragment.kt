@@ -136,7 +136,7 @@ class MyOrdersFragment : Fragment() {
                     val myOrdersAdapter = context?.let { MyOrdersAdapter(it, sortedList) }!!
                     val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     myOrdersRecycler.adapter = myOrdersAdapter
-                    myOrdersRecycler.setHasFixedSize(true)
+                   // myOrdersRecycler.setHasFixedSize(true)
                     myOrdersRecycler.layoutManager = linearLayoutManager
 
                     // Search Option

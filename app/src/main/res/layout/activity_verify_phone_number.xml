@@ -84,6 +84,7 @@
                 android:layout_width="@dimen/dimen_250_dp"
                 android:layout_height="@dimen/dimen_40_dp"
                 android:layout_marginStart="2dp"
+                android:textColorHint="@color/light_gray"
                 android:layout_marginEnd="@dimen/dimen_10dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/lexend"

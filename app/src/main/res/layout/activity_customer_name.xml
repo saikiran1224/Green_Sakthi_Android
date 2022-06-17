@@ -76,6 +76,7 @@
                 android:layout_height="@dimen/dimen_40_dp"
                 android:layout_marginLeft="@dimen/dimen_10dp"
                 android:layout_marginRight="@dimen/dimen_10dp"
+                android:textColorHint="@color/light_gray"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/lexend"
                 android:hint="Name "

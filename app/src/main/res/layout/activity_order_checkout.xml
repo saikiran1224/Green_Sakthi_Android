@@ -225,7 +225,7 @@
                     android:drawableTint="@color/green"
                     android:textColorHint="@color/light_gray"
                     android:gravity="center_vertical"
-                    android:hint="Name of Vehicle E.g WagonR"
+                    android:hint="Name of Vehicle E.g Creta"
                     android:paddingStart="3dp"
                     android:drawablePadding="10dp"
                     android:inputType="text"

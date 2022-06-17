@@ -122,7 +122,7 @@
                 android:layout_below="@id/profileIcon"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dimen_20dp"
-                android:text="Sai Kiran Kopparthi"
+                android:text="User Name"
                 android:textColor="@color/green"
                 android:textSize="18.5sp"
                 android:textStyle="bold" />
@@ -137,7 +137,7 @@
             android:drawableStart="@drawable/ic_phone_new"
             android:layout_marginStart="@dimen/dimen_20dp"
             android:drawableTint="@color/green"
-            android:text="+91 9381384234"
+            android:text="+91 9876543210"
             android:textColor="@color/light_gray"
             android:clickable="true"
             android:focusable="true"

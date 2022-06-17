@@ -26,7 +26,7 @@
             android:layout_marginRight="@dimen/dimen_10dp"
             android:text="Greetings"
             android:textColor="@color/green"
-            android:textSize="@dimen/text_size_14sp" />
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_welcome"
@@ -34,10 +34,10 @@
             android:fontFamily="@font/lexend"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_10dp"
-            android:text="Welcome to Green Sakthi Fuels India Pvt. Ltd."
+            android:text="Welcome to Green Shakti Fuels India Pvt. Ltd."
             android:textColor="@color/darkgreen"
             android:layout_marginEnd="@dimen/dimen_15dp"
-            android:textSize="@dimen/text_size_25sp"
+            android:textSize="25dp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:layout_marginStart="@dimen/dimen_10dp"
             android:text="@string/order_zero_carbon_emission_diesel_at_affordable_price_and_get_it_delivered"
             android:textColor="@color/green"
-            android:textSize="@dimen/text_size_17sp"
+            android:textSize="17dp"
             android:textStyle="normal" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:shadowColor="#6C63FF"
             android:text="Get Started"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="15dp" />
 
     </LinearLayout>
 

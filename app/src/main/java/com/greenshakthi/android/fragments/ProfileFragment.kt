@@ -56,7 +56,10 @@ class ProfileFragment : Fragment() {
         txtVersionName = view.findViewById(R.id.txtAppVersion)
 
         txtCustomerName.text = AppPreferences.customerName.toString()
-        txtCustomerPhone.text = AppPreferences.customerPhone.toString()
+
+        txtCustomerPhone.text = "+91 9876543210"
+
+       // txtCustomerPhone.text = AppPreferences.customerPhone.toString()
 
         txtWriteToUs.setOnClickListener {
 

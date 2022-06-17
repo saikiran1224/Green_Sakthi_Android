@@ -62,6 +62,7 @@ class OTPActivity : AppCompatActivity() {
 
         loadingLayout = findViewById(R.id.loadingLayout)
 
+
         auth = Firebase.auth
 
         Toast.makeText(this, "Please wait for some time, ReCAPTCHA Verification under progress!", Toast.LENGTH_LONG).show()
