@@ -6,8 +6,10 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firestore.v1.StructuredQuery
 import com.greenshakthi.android.R
 import com.greenshakthi.android.models.OrderData
@@ -29,6 +31,9 @@ class MyOrdersAdapter(private val context: Context, private var myOrdersList: Li
             holder.orderStatus.text = myOrdersList[position].orderStatus
             holder.quantity_UnitPrice.text = myOrdersList[position].fuelQuantitySelected + " x " + myOrdersList[position].fuelUnitPrice
             holder.finalPrice.text = "₹ " + myOrdersList[position].finalPrice
+
+            // Loading Image
+            Glide.with(context).load(R.drawable.home_bg).into(holder.fuelImage)
 
             val orderStatus = myOrdersList[position].orderStatus
             if(orderStatus == "Placed") {
@@ -70,6 +75,7 @@ class MyOrdersAdapter(private val context: Context, private var myOrdersList: Li
         val finalPrice = itemView.findViewById<TextView>(R.id.txtFinalPrice)
         val transactionStatus = itemView.findViewById<TextView>(R.id.txtTransStatus)
         val txtTimeStamp = itemView.findViewById<TextView>(R.id.txtTimeStamp)
+        val fuelImage = itemView.findViewById<ImageView>(R.id.fuelImage)
 
     }
 

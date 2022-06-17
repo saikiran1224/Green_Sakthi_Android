@@ -94,8 +94,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:tint="@color/green"
+                        android:id="@+id/codImage"
                         android:padding="@dimen/dimen_10dp"
-                        android:src="@drawable/cash_on_delivery" />
+                        />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -167,7 +168,8 @@
                         android:layout_height="match_parent"
                         app:tint="@color/green"
                         android:padding="@dimen/dimen_10dp"
-                        android:src="@drawable/online_payment" />
+                        android:id="@+id/debitCardImage"
+                         />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -194,12 +196,12 @@
                 android:textSize="17sp" />
 
             <ImageView
+                android:id="@+id/rzpImage"
                 android:layout_width="110dp"
                 android:layout_height="@dimen/dimen_25dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/txtPoweredBy"
-                android:src="@drawable/razorpay_logo" />
+                android:layout_toEndOf="@id/txtPoweredBy" />
 
         </RelativeLayout>
 

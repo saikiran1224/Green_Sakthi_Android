@@ -6,14 +6,17 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.greenshakthi.android.R
 import com.greenshakthi.android.models.OrderData
 import com.greenshakthi.android.utils.AppPreferences
 import com.razorpay.Checkout
@@ -47,6 +50,11 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
     lateinit var db: FirebaseFirestore
 
+    lateinit var codImage: ImageView
+    lateinit var debitCardImage: ImageView
+
+    lateinit var rzpImage: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.greenshakthi.android.R.layout.activity_payment)
@@ -64,6 +72,14 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener, Exte
 
         onlinePaymentCard = findViewById(com.greenshakthi.android.R.id.OnlinePaymentCard)
         cashOnDeliveryCard = findViewById(com.greenshakthi.android.R.id.cashOnDeliveryCard)
+
+        codImage = findViewById(R.id.codImage)
+        debitCardImage = findViewById(R.id.debitCardImage)
+        rzpImage = findViewById(R.id.rzpImage)
+
+        Glide.with(this).load(R.drawable.cash_on_delivery).into(codImage)
+        Glide.with(this).load(R.drawable.online_payment).into(debitCardImage)
+        Glide.with(this).load(R.drawable.razorpay_logo).into(rzpImage)
 
         // disabling the Online Payment Card
         onlinePaymentCard.isEnabled = false

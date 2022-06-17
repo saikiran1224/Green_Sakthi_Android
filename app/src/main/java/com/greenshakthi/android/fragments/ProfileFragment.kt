@@ -1,5 +1,6 @@
 package com.greenshakthi.android.fragments
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -13,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.greenshakthi.android.BuildConfig
 import com.greenshakthi.android.R
 import com.greenshakthi.android.onboarding.GetStartedActivity
 import com.greenshakthi.android.utils.AppPreferences
@@ -29,6 +31,9 @@ class ProfileFragment : Fragment() {
     lateinit var txtRateUs: TextView
     lateinit var txtLogOut: TextView
 
+    lateinit var txtVersionName: TextView
+
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
@@ -47,6 +52,8 @@ class ProfileFragment : Fragment() {
         txtShare = view.findViewById(R.id.txtShare)
         txtRateUs = view.findViewById(R.id.txtRateUsOnPlayStore)
         txtLogoutBtn = view.findViewById(R.id.txtLogout)
+
+        txtVersionName = view.findViewById(R.id.txtAppVersion)
 
         txtCustomerName.text = AppPreferences.customerName.toString()
         txtCustomerPhone.text = AppPreferences.customerPhone.toString()
@@ -70,6 +77,9 @@ class ProfileFragment : Fragment() {
             else
                 Toast.makeText(requireContext(), "Sorry, There is no application supports sending mail.", Toast.LENGTH_LONG).show()
        }
+
+        // Setting the App Version
+        txtVersionName.text = "v${BuildConfig.VERSION_NAME}"
 
         txtAbout.setOnClickListener {
 

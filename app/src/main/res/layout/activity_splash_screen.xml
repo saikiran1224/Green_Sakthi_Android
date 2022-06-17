@@ -16,7 +16,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="100dp"
-        android:src="@drawable/gsf_logo_updated" />
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,6 +31,7 @@
         android:text="@string/an_initiative_by_ngreen_sakthi_fuels_india_private_limited"
         android:textColor="#04701B"
         android:textSize="18sp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        tools:targetApi="p" />
 
 </RelativeLayout>

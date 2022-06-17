@@ -57,7 +57,8 @@
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:alpha="0.155"
-                        android:src="@drawable/home_bg" />
+                        android:id="@+id/homeBackgroundImage"
+                        />
 
                     <TextView
                         android:id="@+id/txtTitle"

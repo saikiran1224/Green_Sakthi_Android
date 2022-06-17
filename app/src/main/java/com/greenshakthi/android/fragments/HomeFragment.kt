@@ -10,12 +10,10 @@ import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieAnimationView
+import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -45,6 +43,8 @@ class HomeFragment : Fragment() {
     lateinit var maintenanceLayout: RelativeLayout
     lateinit var loadingAnim: LottieAnimationView
 
+    lateinit var homeBgImage: ImageView
+
     @SuppressLint("SetTextI18n", "CutPasteId")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -62,6 +62,10 @@ class HomeFragment : Fragment() {
         mainLayout = view.findViewById(R.id.mainLayout)
         maintenanceLayout = view.findViewById(R.id.maintenanceLayout)
         loadingAnim = view.findViewById(R.id.loadingAnim)
+
+        homeBgImage = view.findViewById(R.id.homeBackgroundImage)
+
+        Glide.with(requireContext()).load(R.drawable.home_bg).into(homeBgImage)
 
         // Fuel Details
         txtFuelTitle = view.findViewById(R.id.txtTitle)

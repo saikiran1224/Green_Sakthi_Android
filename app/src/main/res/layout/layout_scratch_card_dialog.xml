@@ -43,7 +43,7 @@
                 android:textSize="27sp"
                 android:textColor="@color/green"
                 android:layout_centerInParent="true"
-                android:text="Rs. 60 " />
+                android:text="Rs. 0 " />
 
             <in.myinnos.androidscratchcard.ScratchCard
                 android:id="@+id/scratchCard"

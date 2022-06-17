@@ -64,8 +64,9 @@
 
                 <ImageView
                     android:layout_width="match_parent"
+                    android:id="@+id/fuelImage"
                     android:layout_height="match_parent"
-                    android:src="@drawable/home_bg" />
+                    />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -222,6 +223,7 @@
                     android:drawableStart="@drawable/ic_baseline_directions_car_24"
                     android:fontFamily="@font/lexend"
                     android:drawableTint="@color/green"
+                    android:textColorHint="@color/light_gray"
                     android:gravity="center_vertical"
                     android:hint="Name of Vehicle E.g WagonR"
                     android:paddingStart="3dp"
@@ -254,6 +256,7 @@
                     android:drawableStart="@drawable/ic_baseline_notes_24"
                     android:inputType="text"
                     android:paddingStart="3dp"
+                    android:textColorHint="@color/light_gray"
                     android:drawablePadding="@dimen/dimen_10dp"
                     android:drawableTint="@color/green"
                     android:textColor="@color/green"
